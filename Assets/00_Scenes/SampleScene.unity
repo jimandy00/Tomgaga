@@ -4935,6 +4935,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &120170271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 181870, guid: 4ce240c7205830642b8ec1ca91bc8670, type: 3}
+  m_PrefabInstance: {fileID: 2089182303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &120170274 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19886816, guid: 4ce240c7205830642b8ec1ca91bc8670, type: 3}
+  m_PrefabInstance: {fileID: 2089182303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &155988278
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,6 +4958,7 @@ GameObject:
   - component: {fileID: 155988281}
   - component: {fileID: 155988286}
   - component: {fileID: 155988285}
+  - component: {fileID: 155988290}
   - component: {fileID: 155988288}
   - component: {fileID: 155988289}
   m_Layer: 0
@@ -5015,7 +5026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155988278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.44, z: 0}
+  m_LocalPosition: {x: 7.8, y: 2.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5079,6 +5090,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &155988290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155988278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d98c81ac81d7474099b03309d93d2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dust: {fileID: 120170271}
+  ps: {fileID: 120170274}
 --- !u!1001 &301906272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6148,7 +6173,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 172736, guid: 4ce240c7205830642b8ec1ca91bc8670, type: 3}
       propertyPath: m_Name
-      value: example_dust (1)
+      value: example_dust
+      objectReference: {fileID: 0}
+    - target: {fileID: 172736, guid: 4ce240c7205830642b8ec1ca91bc8670, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 480316, guid: 4ce240c7205830642b8ec1ca91bc8670, type: 3}
       propertyPath: m_RootOrder
