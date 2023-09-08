@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         // 이동값 가져오기
-        Vector2 axix = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
+        Vector2 axix = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
 
         // 방향 설정하기
         Vector3 dir = new Vector3(axix.x, 0, axix.y);
