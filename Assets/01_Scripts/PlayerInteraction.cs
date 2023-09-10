@@ -47,4 +47,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         print("Å»Ãâ");
     }
+
+    // ¼Ò ¿ŞÂÊ »Ô Àâ±â
 }
