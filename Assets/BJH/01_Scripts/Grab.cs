@@ -11,6 +11,18 @@ using UnityEngine;
 // 위 과정 역순으로
 public class Grab : MonoBehaviour
 {
+    // 잡기 정보
+    bool isGrab = false;
+
+    // 잡고있는 오브젝트 정보
+    GameObject grabGo;
+
+    // 손 살짝 위
+    public GameObject getGoPosition;
+
+    // 놓아버린 오브젝트들을 담는 empty gameobject
+    public GameObject putDown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,22 +34,38 @@ public class Grab : MonoBehaviour
     {
         if(OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            print("잡기 버튼을 눌렀습니다.");
-
-            Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f); // 반경 10cm내
-
-            for(int i=0; i < cols.Length; i++)
+            if(isGrab == false)
             {
-                print("가져온 콜라이더" + cols[i] + "가져온 콜라이더의 게임오브젝트 태그 : " + cols[i].gameObject.tag);
+                print("잡기 버튼을 눌렀습니다.");
 
-                // 만약 잡은 collider의 tag가 targets라면 
-                if(cols[i].gameObject.CompareTag("Target"))
+                Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
+
+                for (int i = 0; i < cols.Length; i++)
                 {
-                    print("Target Tag를 가진 게임오브젝트를 가져왔습니다.");
-                    cols[i].GetComponent<Rigidbody>().isKinematic = true;
-                    cols[i].transform.parent = transform;
+                    print("가져온 콜라이더" + cols[i] + "가져온 콜라이더의 게임오브젝트 태그 : " + cols[i].gameObject.tag);
+
+                    // 만약 잡은 collider의 tag가 targets라면 
+                    if (cols[i].gameObject.CompareTag("Target"))
+                    {
+                        print("Target Tag를 가진 게임오브젝트를 가져왔습니다.");
+                        cols[i].GetComponent<Rigidbody>().isKinematic = true;
+                        cols[i].transform.parent = getGoPosition.transform;
+                        cols[i].transform.localPosition = Vector3.zero;
+                        grabGo = cols[i].gameObject;
+                        isGrab = true;
+                    }
                 }
             }
+            else
+            {
+                print("놓기 버튼을 눌렀습니다.");
+                grabGo.transform.parent = putDown.transform;
+                grabGo.GetComponent<Rigidbody>().isKinematic = false;
+                //grabGo.transform.position = transform.forward * 3f;
+                isGrab = false;
+                
+            }
+
         }
     }
 
