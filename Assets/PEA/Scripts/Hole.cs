@@ -18,42 +18,6 @@ public class Hole : MonoBehaviour
         
     }
 
-    private void EnableCollider()
-    {
-        GetComponent<Collider>().enabled = true;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //    if (collision.gameObject.CompareTag("Sphere"))
-        //    {
-        //        if (hasStone)
-        //        {
-        //            hasStone = false;
-
-        //            //Destroy(spherePos.GetChild(0).gameObject);
-        //        }
-        //        else
-        //        {
-        //            hasStone = true;
-
-        //            collision.transform.SetParent(spherePos);       
-        //            collision.transform.position = spherePos.position;
-        //            HoleManager.instance.CheckIsAnswer();
-        //            //Mouse.instance.CreateSphere();
-        //            //GetComponent<Collider>().enabled = false;
-        //        }
-        //    }
-        //}
-
-        if (collision.gameObject.CompareTag("Sphere") && !hasStone)
-        {
-            hasStone = true;
-            collision.transform.SetParent(spherePos);
-            collision.transform.position = spherePos.position;
-        }
-    }
-
     public void GetStone(GameObject stone)
     {
         hasStone = true;
@@ -62,9 +26,19 @@ public class Hole : MonoBehaviour
         HoleManager.instance.CheckIsAnswer();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Stone") && !hasStone)
+        {
+            hasStone = true;
+            collision.transform.SetParent(spherePos);
+            collision.transform.position = spherePos.position;
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
-        if(hasStone && collision.transform.CompareTag("Sphere"))
+        if(hasStone && collision.gameObject.name.Contains("Stone"))
         {
             hasStone = false;
             collision.transform.SetParent(null);

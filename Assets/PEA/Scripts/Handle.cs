@@ -4,85 +4,61 @@ using UnityEngine;
 
 public class Handle : MonoBehaviour
 {
-    public enum HandleState
+    public enum HandleType
     {
-        None,
-        Left,
-        Right
+        Right,
+        Left
     }
 
-    private HandleState handleState = HandleState.None;
+    public HandleType handleType;
+    private float rotateIntensity = 45f;
 
-    private float maxRotZ = 20f;
-    private Vector3 leftHandleEulerAngle;
-    private Vector3 rightHandleEulerAngle;
-    private Transform leftHandle;
-    private Transform rightHandle;
+    private float rightHandleMaxZ = 30f;
+    private float rightHandleMinZ = 0f;
+    private float leftHandleMaxZ = 0f;
+    private float leftHandleMinZ = -30f;
+
+    private Vector3 eulerAngle;
 
     public RevolvingDoor revolvingDoor;
 
     void Start()
     {
-        leftHandle = transform.GetChild(0);
-        rightHandle = transform.GetChild(1);
-
-        leftHandleEulerAngle = leftHandle.localEulerAngles;
-        rightHandleEulerAngle = rightHandle.localEulerAngles;
+        eulerAngle = transform.localEulerAngles;
+        if(eulerAngle.z > 180f)
+        {
+            eulerAngle.z -= 360f;
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+
+    }
+
+    public void HoldHandle(float changeAmoutOfHandY)
+    {
+        if(!enabled )
+            return;
+        eulerAngle.z += changeAmoutOfHandY * rotateIntensity;
+        if(handleType == HandleType.Right)
         {
-            if(handleState != HandleState.Left)
+            eulerAngle.z = Mathf.Clamp(eulerAngle.z, rightHandleMinZ, rightHandleMaxZ);
+            if(eulerAngle.z == rightHandleMinZ)
             {
-                handleState = HandleState.Left;
-                revolvingDoor.RotateRevolvingDoor(handleState);
+                Puzzle1.instance.RotRevolvingDoor(handleType);
+                enabled = false;
             }
         }
-
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else
         {
-            if(handleState != HandleState.Right)
+            eulerAngle.z = Mathf.Clamp(eulerAngle.z, leftHandleMinZ, leftHandleMaxZ);
+            if (eulerAngle.z == leftHandleMaxZ)
             {
-                handleState = HandleState.Right;
-                revolvingDoor.RotateRevolvingDoor(handleState);
+                Puzzle1.instance.RotRevolvingDoor(handleType);
+                enabled = false;
             }
         }
-
-        switch (handleState)
-        {
-            case HandleState.None:
-                break;
-
-            case HandleState.Left:
-                if(leftHandleEulerAngle.z > -maxRotZ)
-                {
-                    leftHandleEulerAngle.z -= Time.deltaTime * 80f;
-                    leftHandle.localEulerAngles = leftHandleEulerAngle;
-                }
-
-                if(rightHandleEulerAngle.z > 0)
-                {
-                    rightHandleEulerAngle.z -= Time.deltaTime * 80f;
-                    rightHandle.localEulerAngles = rightHandleEulerAngle;
-                }
-
-                break;
-
-            case HandleState.Right:
-                if (leftHandleEulerAngle.z < 0)
-                {
-                    leftHandleEulerAngle.z += Time.deltaTime * 80f;
-                    leftHandle.localEulerAngles = leftHandleEulerAngle;
-                }
-
-                if (rightHandleEulerAngle.z < maxRotZ)
-                {
-                    rightHandleEulerAngle.z += Time.deltaTime * 80f;
-                    rightHandle.localEulerAngles = rightHandleEulerAngle;
-                }
-                break;
-        }
+        transform.localEulerAngles = eulerAngle;
     }
 }
