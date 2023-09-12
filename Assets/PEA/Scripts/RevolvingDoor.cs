@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RevolvingDoor : MonoBehaviour
 {
-    private Handle.HandleState hState = Handle.HandleState.None;
+    private Puzzle1.HandleState hState = Puzzle1.HandleState.None;
 
     private Vector3 eulerAngle;
     private Vector3 failRot;
@@ -21,17 +21,17 @@ public class RevolvingDoor : MonoBehaviour
     {
         switch (hState)
         {
-            case Handle.HandleState.None:
+            case Puzzle1.HandleState.None:
                 break;
 
-            case Handle.HandleState.Left:
+            case Puzzle1.HandleState.Left:
                 if(eulerAngle.y < failRot.y)
                 {
                     eulerAngle.y += Time.deltaTime * 180f;
                 }
                 break;
 
-            case Handle.HandleState.Right:
+            case Puzzle1.HandleState.Right:
                 print("right");
                 if (eulerAngle.y > rightRot.y)
                 {
@@ -42,7 +42,7 @@ public class RevolvingDoor : MonoBehaviour
         transform.eulerAngles = eulerAngle;
     }
 
-    public void RotateRevolvingDoor(Handle.HandleState handleState)
+    public void RotateRevolvingDoor(Puzzle1.HandleState handleState)
     {
         hState = handleState;
     }
