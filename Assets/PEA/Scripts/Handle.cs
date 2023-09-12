@@ -40,6 +40,8 @@ public class Handle : MonoBehaviour
     {
         if(!enabled )
             return;
+
+        print("333333333333333");
         eulerAngle.z += changeAmoutOfHandY * rotateIntensity;
         if(handleType == HandleType.Right)
         {
