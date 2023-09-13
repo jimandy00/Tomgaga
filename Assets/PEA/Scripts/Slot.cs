@@ -50,17 +50,19 @@ public class Slot : MonoBehaviour
         item.transform.SetParent(transform);
         item.transform.localPosition = Vector3.zero;
         item.transform.localEulerAngles = Vector3.zero;
+        item.GetComponent<Collider>().enabled = false;
         print(item.name);
     }
 
-    public void TakeItemOut(Transform handTr)
+    public GameObject TakeItemOut(Transform handTr)
     {
         if (itemCount <= 0)
-            return;
+            return null;
 
         GameObject item = transform.GetChild(1).gameObject;
-        item.transform.SetParent(handTr);
-        item.transform.position = Vector3.zero;
+        item.GetComponent<Collider>().enabled = true;
+        //item.transform.SetParent(handTr);
+        //item.transform.position = Vector3.zero;
         itemCount--;
         itemCountText.text = itemCount.ToString();
 
@@ -73,6 +75,8 @@ public class Slot : MonoBehaviour
                 print("non");
             }
         }
+
+        return item;
     }
 
     public void OnClickSlot()
