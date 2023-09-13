@@ -23,11 +23,12 @@ public class VRHand_Test : MonoBehaviour
     {
         if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, controller))
         {
-            if(slot!= null && item.transform.IsChildOf(slot.transform))
+            //if(slot!= null && item.transform.IsChildOf(slot.transform))
+            if(slot!= null)
             {
-                slot.TakeItemOut(grabPos);
-                //item.transform.SetParent(grabPos);
-                //item.transform.localPosition = Vector3.zero;
+                item = slot.TakeItemOut(grabPos);
+                item.transform.SetParent(grabPos);
+                item.transform.localPosition = Vector3.zero;
                 isGrab = true;
             }
             else if (item != null)
