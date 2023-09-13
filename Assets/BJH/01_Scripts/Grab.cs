@@ -54,9 +54,10 @@ public class Grab : MonoBehaviour
                     grabGo = CompareDistance(cols);
                     print(grabGo.name);
 
-                    print(slot.name);
+                    
                     if(slot != null && grabGo.transform.IsChildOf(slot.transform))
                     {
+                        print(slot.name);
                         slot.TakeItemOut(getGoPosition.transform);
                     }
                     else
