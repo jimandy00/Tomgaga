@@ -3688,19 +3688,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getGoPosition: {fileID: 2145863269}
   putDown: {fileID: 575520489}
---- !u!135 &1593691816
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593691811}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.07
-  m_Center: {x: 0.4, y: 0, z: 0}
 --- !u!1 &1660365670
 GameObject:
   m_ObjectHideFlags: 0
