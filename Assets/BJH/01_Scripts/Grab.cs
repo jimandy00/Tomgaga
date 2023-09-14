@@ -37,7 +37,7 @@ public class Grab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || Input.GetKeyDown(KeyCode.Alpha1))
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
             if (isGrab == false)
                 return;
@@ -63,7 +63,7 @@ public class Grab : MonoBehaviour
             isGrab = true;
         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
             print("111111111");
             Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
@@ -85,7 +85,7 @@ public class Grab : MonoBehaviour
             }
         }
 
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
             //print("놓기 버튼을 눌렀습니다.");
             if(slot != null && grabGo != null)
