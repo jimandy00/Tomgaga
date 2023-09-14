@@ -17,8 +17,6 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<int, string> dialogues = new Dictionary<int, string>();
 
 
-    private int n = 0;
-
     private void Awake()
     {
         if(instance == null)
@@ -37,11 +35,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            n++;
-            ShowDialogue(n);
-        }
+
     }
 
     public void ReadDialogueCSV(TextAsset csvData)
@@ -52,37 +46,42 @@ public class DialogueManager : MonoBehaviour
         {
             string[] row = data[i].Split(',');
 
-            //print(int.Parse(row[1]) + " : " + row[1]);
             dialogues.Add(int.Parse(row[0]), row[1]);
         }
     }
 
-    public void ShowDialogue(int dialogueNum)
+    public void ShowDialogue(int dialogueNum, int dialogueEndNum, System.Action action = null)
     {
-        if(dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
+        if (coroutine == null)
         {
-            if(coroutine == null)
+            coroutine = StartCoroutine(TypeDialogue(dialogueNum, dialogueEndNum));
+        }
+    }
+
+    IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum)
+    {
+        if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
+        {
+            for (int i = 0; i < curShowingDialogue.Length; i++)
             {
-                coroutine = StartCoroutine(TypeDialogue());
+                dialogueText.text += curShowingDialogue[i];
+                yield return new WaitForSeconds(0.05f);
             }
+
+            yield return new WaitForSeconds(3f);
         }
         else
         {
             print(dialogueNum + ", 해당 번호에 맞는 대사없음");
         }
-    }
-
-    IEnumerator TypeDialogue()
-    {
-        for (int i = 0; i < curShowingDialogue.Length; i++)
-        {
-            dialogueText.text += curShowingDialogue[i];
-            yield return new WaitForSeconds(0.05f);
-        }
-
-        yield return new WaitForSeconds(1f);
 
         dialogueText.text = "";
+
+        if(dialogueNum < dialogueEndNum)
+        {
+            yield return TypeDialogue(++dialogueNum, dialogueEndNum);
+        }
+
         coroutine = null;
         yield return null;
     }
