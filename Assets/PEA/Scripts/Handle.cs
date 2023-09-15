@@ -11,7 +11,7 @@ public class Handle : MonoBehaviour
     }
 
     public HandleType handleType;
-    private float rotateIntensity = 45f;
+    private float rotateIntensity = 360f;
     private readonly float maxRotX = 0f;
     private readonly float minRotX = -90f;
 
@@ -21,9 +21,9 @@ public class Handle : MonoBehaviour
     void Start()
     {
         eulerAngle = originEulerAngle = transform.localEulerAngles;
-        if(eulerAngle.z > 180f)
+        if(eulerAngle.x > 180f)
         {
-            eulerAngle.z -= 360f;
+            eulerAngle.x -= 360f;
         }
     }
 
@@ -37,8 +37,8 @@ public class Handle : MonoBehaviour
         if(!enabled )
             return;
 
-        eulerAngle.z += changeAmoutOfHandY * rotateIntensity;
-        eulerAngle.z = Mathf.Clamp(eulerAngle.z, minRotX, maxRotX);
+        eulerAngle.x += changeAmoutOfHandY * rotateIntensity;
+        eulerAngle.x = Mathf.Clamp(eulerAngle.x, minRotX, maxRotX);
         //if(handleType == HandleType.Right)
         //{
         //    eulerAngle.z = Mathf.Clamp(eulerAngle.z, rightHandleMinZ, rightHandleMaxZ);
