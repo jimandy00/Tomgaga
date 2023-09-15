@@ -6,10 +6,10 @@ public class Dialogue : MonoBehaviour
 {
     public int dialogueNum;
     public int dialogueEndNum;
-
+    public bool isPrologue = false;
 
     public void ShowDialogue()
     {
-        DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum);
+        DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue);
     }
 }
