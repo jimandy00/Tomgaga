@@ -44,6 +44,14 @@ public class PrologueManager : MonoBehaviour
         }
     }
 
+    public void FadeOutImage()
+    {
+        if(coroutine == null)
+        {
+            coroutine = StartCoroutine(IFadeOutImgae());
+        }
+    }
+
     IEnumerator IShowImage(int spriteNum)
     {
         while (color.a > 0)
@@ -65,5 +73,15 @@ public class PrologueManager : MonoBehaviour
 
         coroutine = null;
         yield return null;
+    }
+
+    IEnumerator IFadeOutImgae()
+    {
+        while (color.a > 0)
+        {
+            color.a -= Time.deltaTime * imageFadeSpeed;
+            curImage.color = color;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
