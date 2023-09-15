@@ -18943,7 +18943,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 270c6431be018cd42990c4b1e4e18823, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bca2ec01eff36b54fbbde16fa540a004, type: 2}
+      objectReference: {fileID: 2100000, guid: 1c7ba47d445a8da48802f46ea443ddbb, type: 2}
     - target: {fileID: 919132149155446097, guid: 270c6431be018cd42990c4b1e4e18823, type: 3}
       propertyPath: m_Name
       value: SM_Arc_door
@@ -19737,10 +19737,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 6413746652832612111, guid: b0281e8e22f13de4c9086512a01ce9b3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c7ba47d445a8da48802f46ea443ddbb, type: 2}
     - target: {fileID: 7963189301177548054, guid: b0281e8e22f13de4c9086512a01ce9b3, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 8992797290524839866, guid: b0281e8e22f13de4c9086512a01ce9b3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c7ba47d445a8da48802f46ea443ddbb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0281e8e22f13de4c9086512a01ce9b3, type: 3}
 --- !u!1 &1991652998 stripped
