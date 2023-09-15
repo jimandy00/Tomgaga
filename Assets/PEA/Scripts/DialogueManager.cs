@@ -50,16 +50,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void ShowDialogue(int dialogueNum, int dialogueEndNum, System.Action action = null)
+    public void ShowDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue = false)
     {
         if (coroutine == null)
         {
-            coroutine = StartCoroutine(TypeDialogue(dialogueNum, dialogueEndNum));
+            coroutine = StartCoroutine(TypeDialogue(dialogueNum, dialogueEndNum, isPrologue));
         }
     }
 
-    IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum)
+    IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue)
     {
+        PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
         if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
         {
             for (int i = 0; i < curShowingDialogue.Length; i++)
@@ -72,14 +73,14 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            print(dialogueNum + ", 해당 번호에 맞는 대사없음");
+            print(dialogueNum + ", 해당 번호에 맞는 지문없음");
         }
 
         dialogueText.text = "";
 
         if(dialogueNum < dialogueEndNum)
         {
-            yield return TypeDialogue(++dialogueNum, dialogueEndNum);
+            yield return TypeDialogue(++dialogueNum, dialogueEndNum, isPrologue);
         }
 
         coroutine = null;
