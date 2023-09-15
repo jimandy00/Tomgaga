@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueNum: 1
   dialogueEndNum: 6
+  isPrologue: 1
 --- !u!114 &709369209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,8 +629,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f368186745b840140874daaf3f09d827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curImage: {fileID: 0}
-  prologueImages: []
+  curImage: {fileID: 1195586315}
+  prologueSprites:
+  - {fileID: 21300000, guid: bedf2d7152b8bc541a307fb313734c8e, type: 3}
+  - {fileID: 21300000, guid: b1f4e045c7492824da0c97909e4d3251, type: 3}
+  - {fileID: 21300000, guid: 4dfa741b639be04499fe60e5ad3b2757, type: 3}
+  - {fileID: 21300000, guid: c30639f4198b8af4e8997331af762f9e, type: 3}
+  - {fileID: 21300000, guid: dde5a706cd09c60488bec195d9b94205, type: 3}
+  - {fileID: 21300000, guid: 674546745d05d86428019bd23c2fca51, type: 3}
 --- !u!1 &810746479
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueCSVPath: Dialogue.txt
-  dialogueText: {fileID: 0}
+  dialogueText: {fileID: 703654989}
 --- !u!4 &810746481
 Transform:
   m_ObjectHideFlags: 0
@@ -854,15 +861,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 94210c6fefbcf994cb393e910121525e, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bedf2d7152b8bc541a307fb313734c8e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1f4e045c7492824da0c97909e4d3251, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
