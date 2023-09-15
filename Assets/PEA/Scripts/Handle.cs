@@ -12,19 +12,15 @@ public class Handle : MonoBehaviour
 
     public HandleType handleType;
     private float rotateIntensity = 45f;
+    private readonly float maxRotX = 0f;
+    private readonly float minRotX = -90f;
 
-    private float rightHandleMaxZ = 30f;
-    private float rightHandleMinZ = 0f;
-    private float leftHandleMaxZ = 0f;
-    private float leftHandleMinZ = -30f;
-
+    private Vector3 originEulerAngle;
     private Vector3 eulerAngle;
-
-    public RevolvingDoor revolvingDoor;
 
     void Start()
     {
-        eulerAngle = transform.localEulerAngles;
+        eulerAngle = originEulerAngle = transform.localEulerAngles;
         if(eulerAngle.z > 180f)
         {
             eulerAngle.z -= 360f;
@@ -41,26 +37,32 @@ public class Handle : MonoBehaviour
         if(!enabled )
             return;
 
-        print("333333333333333");
         eulerAngle.z += changeAmoutOfHandY * rotateIntensity;
-        if(handleType == HandleType.Right)
-        {
-            eulerAngle.z = Mathf.Clamp(eulerAngle.z, rightHandleMinZ, rightHandleMaxZ);
-            if(eulerAngle.z == rightHandleMinZ)
-            {
-                Puzzle1.instance.RotRevolvingDoor(handleType);
-                enabled = false;
-            }
-        }
-        else
-        {
-            eulerAngle.z = Mathf.Clamp(eulerAngle.z, leftHandleMinZ, leftHandleMaxZ);
-            if (eulerAngle.z == leftHandleMaxZ)
-            {
-                Puzzle1.instance.RotRevolvingDoor(handleType);
-                enabled = false;
-            }
-        }
+        eulerAngle.z = Mathf.Clamp(eulerAngle.z, minRotX, maxRotX);
+        //if(handleType == HandleType.Right)
+        //{
+        //    eulerAngle.z = Mathf.Clamp(eulerAngle.z, rightHandleMinZ, rightHandleMaxZ);
+        //    if(eulerAngle.z == rightHandleMinZ)
+        //    {
+        //        Puzzle1.instance.RotRevolvingDoor(handleType);
+        //        enabled = false;
+        //    }
+        //}
+        //else
+        //{
+        //    eulerAngle.z = Mathf.Clamp(eulerAngle.z, leftHandleMinZ, leftHandleMaxZ);
+        //    if (eulerAngle.z == leftHandleMaxZ)
+        //    {
+        //        Puzzle1.instance.RotRevolvingDoor(handleType);
+        //        enabled = false;
+        //    }
+        //}
+        transform.localEulerAngles = eulerAngle;
+    }
+
+    public void ResetHandle()
+    {
+        eulerAngle = originEulerAngle;
         transform.localEulerAngles = eulerAngle;
     }
 }

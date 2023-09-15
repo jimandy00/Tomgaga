@@ -61,8 +61,6 @@ public class Slot : MonoBehaviour
 
         GameObject item = transform.GetChild(1).gameObject;
         item.GetComponent<Collider>().enabled = true;
-        //item.transform.SetParent(handTr);
-        //item.transform.position = Vector3.zero;
         itemCount--;
         itemCountText.text = itemCount.ToString();
 
@@ -71,8 +69,8 @@ public class Slot : MonoBehaviour
             itemCountText.gameObject.SetActive(false);
             if(itemCount < 1)
             {
+                itemInfo.item = null;
                 hasItem = false;
-                print("non");
             }
         }
 

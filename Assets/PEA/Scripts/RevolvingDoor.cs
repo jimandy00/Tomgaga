@@ -6,15 +6,18 @@ public class RevolvingDoor : MonoBehaviour
 {
     private Puzzle1.HandleState hState = Puzzle1.HandleState.None;
 
+    private Vector3 originEulerAngle;
     private Vector3 eulerAngle;
     private Vector3 failRot;
     private Vector3 rightRot;
+    private readonly float failRotY = 0;
+    private readonly float rightRotY = -90;
 
     void Start()
     {
-        eulerAngle = rightRot = failRot = transform.eulerAngles;
-        failRot.y += 90f;
-        rightRot.y -= 90f;
+        eulerAngle = originEulerAngle = failRot = rightRot = transform.eulerAngles;
+        failRot.y = failRotY;
+        rightRot.y = rightRotY;
     }
 
     void Update()
@@ -25,25 +28,30 @@ public class RevolvingDoor : MonoBehaviour
                 break;
 
             case Puzzle1.HandleState.Left:
-                if(eulerAngle.y < failRot.y)
-                {
-                    eulerAngle.y += Time.deltaTime * 180f;
-                }
+                eulerAngle = Vector3.Lerp(eulerAngle, failRot, Time.deltaTime * 2f);
                 break;
 
             case Puzzle1.HandleState.Right:
-                print("right");
-                if (eulerAngle.y > rightRot.y)
-                {
-                    eulerAngle.y -= Time.deltaTime * 180f;
-                }
+                eulerAngle = Vector3.Lerp(eulerAngle, rightRot, Time.deltaTime * 2f);
                 break;
         }
+
+        if(eulerAngle.y > 180)
+        {
+            eulerAngle.y -= 360f;
+        }
+
         transform.eulerAngles = eulerAngle;
     }
 
     public void RotateRevolvingDoor(Puzzle1.HandleState handleState)
     {
         hState = handleState;
+    }
+
+    public void ResetRevolvingDoor()
+    {
+        eulerAngle = originEulerAngle;
+        transform.eulerAngles = eulerAngle;
     }
 }

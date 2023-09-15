@@ -15,12 +15,25 @@ public class Puzzle1 : MonoBehaviour
     private HandleState handleState = HandleState.None;
 
     public RevolvingDoor revolvingDoor;
+    public Handle[] handles;
 
     private void Awake()
     {
         instance = this;
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            RotRevolvingDoor(Handle.HandleType.Left);
+        }
+        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            RotRevolvingDoor(Handle.HandleType.Right);
+        }
+    }
 
     public void RotRevolvingDoor(Handle.HandleType handleType)
     {
@@ -34,5 +47,15 @@ public class Puzzle1 : MonoBehaviour
         }
 
         revolvingDoor.RotateRevolvingDoor(handleState);
+    }
+
+    public void ResetPuzzle()
+    {
+        handleState = HandleState.None;
+        foreach (Handle handle in handles)
+        {
+            handle.ResetHandle();
+        }
+        revolvingDoor.ResetRevolvingDoor();
     }
 }
