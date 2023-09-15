@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 플레이어가 죽으면
 // 스폰 포인트에 플레이어를 생성한다.
 // 만약 특정 위치의 트리거를 밟으면
 // 스폰 포인트를 해당 위치로 변경한다.
-// 요소 : 플레이어 생존 여부, 스폰 포인트 오브젝트정보(트리거를 포함한), 스폰 위치를 저장해 둘 변수
+// 요소 : 플레이어 생존 여부, 스폰 포인트 오브젝트정보(트리거를 포함한), 스폰 위치를 저장해 둘 변수, 화면 어둡게 만들 UI
 public class Spawn : MonoBehaviour
 {
     bool playerState = true;
@@ -15,12 +16,18 @@ public class Spawn : MonoBehaviour
     public GameObject spawnPoint02;
     public GameObject spawnPoint03;
 
+    public GameObject ui;
+
     Transform savedSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         savedSpawnPoint = spawnPoint01.transform;
+        ui.SetActive(false);
+
+        img = ui.GetComponent<Image>();
+
     }
 
     // Update is called once per frame
@@ -29,8 +36,7 @@ public class Spawn : MonoBehaviour
         if(playerState == false)
         {
             print("플레이어 위치를 " + savedSpawnPoint.position + "로 이동했습니다.");
-            transform.position = savedSpawnPoint.position;
-            playerState = true;
+            PlayerMoveToSpawnPoint();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
@@ -38,6 +44,29 @@ public class Spawn : MonoBehaviour
             print("플레이어가 죽었습니다.");
             playerState = false;
         }
+    }
+
+    float currentTime = 0;
+    Image img;
+    void PlayerMoveToSpawnPoint()
+    {
+
+        currentTime += Time.deltaTime;
+
+        // 화면 어둡게 만들기
+        ui.SetActive(true);
+        var temp = img.color;
+        temp.a = 1f;
+
+
+        if(currentTime >= 2)
+        {
+            ui.SetActive(false);
+            transform.position = savedSpawnPoint.position;
+            playerState = true;
+            currentTime = 0;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

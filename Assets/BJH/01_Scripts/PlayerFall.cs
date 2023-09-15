@@ -31,7 +31,7 @@ public class PlayerFall : MonoBehaviour
     {
         if(psStatus == false)
         {
-            ps.Stop();
+            //ps.Stop();
         }
     }
 
