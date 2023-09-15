@@ -50,15 +50,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void ShowDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue = false)
+    public void ShowDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue = false, System.Action action = null)
     {
         if (coroutine == null)
         {
-            coroutine = StartCoroutine(TypeDialogue(dialogueNum, dialogueEndNum, isPrologue));
+            coroutine = StartCoroutine(TypeDialogue(dialogueNum, dialogueEndNum, isPrologue, action));
         }
     }
 
-    IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue)
+    IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue, System.Action action = null)
     {
         PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
         if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
@@ -84,6 +84,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         coroutine = null;
+        action();
         yield return null;
     }
 }

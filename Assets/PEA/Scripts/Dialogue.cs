@@ -8,8 +8,8 @@ public class Dialogue : MonoBehaviour
     public int dialogueEndNum;
     public bool isPrologue = false;
 
-    public void ShowDialogue()
+    public void ShowDialogue(System.Action action = null)
     {
-        DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue);
+        DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue, action);
     }
 }
