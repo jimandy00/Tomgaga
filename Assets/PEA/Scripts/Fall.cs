@@ -12,24 +12,26 @@ public class Fall : MonoBehaviour
 
     private void Start()
     {
-        dust = GetComponentInChildren<ParticleSystem>();
-        dust.transform.SetAsLastSibling();
-        fallLoad = transform.GetChild(0);
+        //dust = GetComponentInChildren<ParticleSystem>();
+        //dust.transform.SetAsLastSibling();
+        //fallLoad = transform.GetChild(0);
+        fallLoad = transform;
         originPos = fallLoad.position;
     }
 
     void Update()
     {
-        if(isFall && fallLoad.localPosition.y > -5f)
+        if(isFall && fallLoad.localPosition.y > -0.4f)
         {
-            fallLoad.Translate(-fallLoad.up * 3f * Time.deltaTime);
+            //fallLoad.Translate(Vector3.down * 3f * Time.deltaTime);
+            fallLoad.position += Vector3.down * 3f * Time.deltaTime;
         }
     }
 
     public void StartFall()
     {
         isFall = true;
-        dust.Play();
+        //dust.Play();
     }
 
     public void ResetPos()
