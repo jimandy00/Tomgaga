@@ -77,7 +77,10 @@ public class Grab : MonoBehaviour
                         prevY = transform.position.y;
                     }
 
-                    Handle handle = cols[i].transform.parent.GetComponent<Handle>();
+                    Handle handle = cols[i].transform.GetComponent<Handle>();
+                    print(prevY);
+
+                    
 
                     handle.HoldHandle(prevY - transform.position.y);
                     prevY = transform.position.y;
