@@ -1,77 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 플레이어가 죽으면
-// 스폰 포인트에 플레이어를 생성한다.
-// 만약 특정 위치의 트리거를 밟으면
-// 스폰 포인트를 해당 위치로 변경한다.
-// 요소 : 플레이어 생존 여부, 스폰 포인트 오브젝트정보(트리거를 포함한), 스폰 위치를 저장해 둘 변수, 화면 어둡게 만들 UI
+// 스폰 포인트 일정 구간에 플레이어가 감지되면
+// 플레이어가 죽음 상태일 때 스폰 포인트에 플레이어를 위치시킨다.
 public class Spawn : MonoBehaviour
 {
     bool playerState = true;
+    Transform savedSpawn;
 
-    public GameObject spawnPoint01;
-    public GameObject spawnPoint02;
-    public GameObject spawnPoint03;
-
-    public GameObject ui;
-
-    Transform savedSpawnPoint;
+    public GameObject spawnPoint;
+    public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
     {
-        savedSpawnPoint = spawnPoint01.transform;
-        ui.SetActive(false);
-
-        img = ui.GetComponent<Image>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerState == false)
+        Collider[] cols = Physics.OverlapSphere(transform.position, 20f);
+
+        for (int i = 0; i < cols.Length; i++)
         {
-            print("플레이어 위치를 " + savedSpawnPoint.position + "로 이동했습니다.");
-            PlayerMoveToSpawnPoint();
+            if (cols[i].name == "Player")
+            {
+                savedSpawn = spawnPoint.transform;
+                
+            }
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(playerState == false || Input.GetKeyDown(KeyCode.Q)) // 플레이어가 죽음
         {
-            print("플레이어가 죽었습니다.");
-            playerState = false;
+            Player.transform.position = savedSpawn.position;
         }
-    }
-
-    float currentTime = 0;
-    Image img;
-    void PlayerMoveToSpawnPoint()
-    {
-
-        currentTime += Time.deltaTime;
-
-        // 화면 어둡게 만들기
-        ui.SetActive(true);
-        var temp = img.color;
-        temp.a = 1f;
-
-
-        if(currentTime >= 2)
-        {
-            ui.SetActive(false);
-            transform.position = savedSpawnPoint.position;
-            playerState = true;
-            currentTime = 0;
-        }
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        print("스폰 포인트가 " + other.gameObject.name + "로 변경되었습니다.");
-        savedSpawnPoint.position = other.gameObject.transform.position;
     }
 }
