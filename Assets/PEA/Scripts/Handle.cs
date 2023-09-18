@@ -12,8 +12,10 @@ public class Handle : MonoBehaviour
 
     public HandleType handleType;
     private float rotateIntensity = 360f;
-    private readonly float maxRotX = 0f;
-    private readonly float minRotX = -90f;
+    private readonly float maxRightRotX = 0f;
+    private readonly float minRightRotX = -90f;
+    private readonly float maxLeftRotX = -90f;
+    private readonly float minLeftRotX = -180f;
 
     private Vector3 originEulerAngle;
     private Vector3 eulerAngle;
@@ -37,8 +39,27 @@ public class Handle : MonoBehaviour
         if(!enabled )
             return;
 
-        eulerAngle.x += changeAmoutOfHandY * rotateIntensity;
-        eulerAngle.x = Mathf.Clamp(eulerAngle.x, minRotX, maxRotX);
+        if(handleType == HandleType.Right)
+        {
+            eulerAngle.x += changeAmoutOfHandY * rotateIntensity;
+            eulerAngle.x = Mathf.Clamp(eulerAngle.x, minRightRotX, maxRightRotX);
+
+            if(eulerAngle.x == maxRightRotX)
+            {
+                Puzzle1.instance.RotRevolvingDoor(handleType);
+                enabled = false;
+            }
+        }
+        else
+        {
+            eulerAngle.x -= changeAmoutOfHandY * rotateIntensity;
+            eulerAngle.x = Mathf.Clamp(eulerAngle.x, minLeftRotX, maxLeftRotX);
+            if(eulerAngle.x == minLeftRotX)
+            {
+                Puzzle1.instance.RotRevolvingDoor(handleType);
+                enabled = false;
+            }
+        }
         //if(handleType == HandleType.Right)
         //{
         //    eulerAngle.z = Mathf.Clamp(eulerAngle.z, rightHandleMinZ, rightHandleMaxZ);

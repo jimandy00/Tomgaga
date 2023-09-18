@@ -47,6 +47,10 @@ public class Puzzle1 : MonoBehaviour
         }
 
         revolvingDoor.RotateRevolvingDoor(handleState);
+        foreach (Handle handle in handles)
+        {
+            handle.enabled = false;
+        }
     }
 
     public void ResetPuzzle()
