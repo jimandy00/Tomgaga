@@ -17,7 +17,7 @@ public class Trap2 : MonoBehaviour
 
     void Update()
     {
-        print(lerpT);
+        //print(lerpT);
         lerpT += Time.deltaTime / 10f;
         transform.position = Vector3.Lerp(originPos, targetPos, lerpT );
     }
