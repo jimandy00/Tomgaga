@@ -12,6 +12,10 @@ public class Puzzle2 : MonoBehaviour
     public Puzzle2_Mural[] murals;
     public Trap2 trap2;
 
+    public Dialogue firstStoneDialogue;
+    public Dialogue clearDialogue;
+    public Dialogue failDialogue;
+
     public bool IsComplete
     {
         get { return isComplete; }
@@ -33,6 +37,7 @@ public class Puzzle2 : MonoBehaviour
         {
             if (mural.HasStone)
             {
+                firstStoneDialogue.ShowDialogue();
                 print(isComplete);
                 return;
             }

@@ -9,6 +9,11 @@ public class Trap2 : MonoBehaviour
     private Vector3 originPos;
     private Vector3 targetPos;
 
+    private void OnEnable()
+    {
+        GetComponent<Dialogue>().ShowDialogue();
+    }
+
     void Start()
     {
         originPos = targetPos = transform.position;

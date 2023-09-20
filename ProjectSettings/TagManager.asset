@@ -9,6 +9,8 @@ TagManager:
   - Handle
   - Slot
   - Grabbable
+  - Dialogue
+  - Dialogue_Ray
   layers:
   - Default
   - TransparentFX
