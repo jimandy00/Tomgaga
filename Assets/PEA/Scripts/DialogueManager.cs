@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -31,11 +32,6 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
-    }
-
-    void Update()
-    {
-
     }
 
     public void ReadDialogueCSV(TextAsset csvData)

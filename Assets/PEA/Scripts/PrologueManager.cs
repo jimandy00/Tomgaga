@@ -66,6 +66,7 @@ public class PrologueManager : MonoBehaviour
 
         if(spriteNum == prologueSprites.Length - 1)
         {
+            yield return new WaitForSeconds(3f);
             yield return IFadeOutImage();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

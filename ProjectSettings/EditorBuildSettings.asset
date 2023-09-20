@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/PEA/Scenes/PrologueScene.unity
     guid: 0bdac4c8db82d034f84039a31018c5ee
   - enabled: 1
-    path: Assets/Scenes/ProtoScene.unity
-    guid: 1c34834ad68711f44876bec16a3b621b
+    path: Assets/PEA/Scenes/ProtoScene 1.unity
+    guid: 6d5a67e9ced52614b895362d57332436
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: cf6c572fb68435f42919abc19fb82783, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1e5a52bbca752bb4bb620c381e8bc3f4, type: 2}
