@@ -12,10 +12,18 @@ public class PlayerMove : MonoBehaviour
     // 카메라
     public GameObject rig;
 
+    // 움직이는 상태
+    bool isMoving;
+
+    // 오디오
+    AudioSource audio;
+
+    // 
+
     // Start is called before the first frame update
     void Start()
     {
-
+        audio = GetComponent<AudioSource>();
         
     }
 
@@ -25,12 +33,29 @@ public class PlayerMove : MonoBehaviour
         // 이동값 가져오기
         Vector2 axix = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
 
+        // Vector2는 reference가 아니라서 value값임. 그래서 vector2.zero로 해야됨!!
+        if(axix != Vector2.zero && isMoving == false) // 안움직이다가 움직이게 됐을 때
+        {
+            audio.Play();
+            audio.loop = true;
+            isMoving = true;
+        }
+        else if(axix == Vector2.zero)
+        {
+            audio.loop = false;
+            isMoving = false;
+        }
+
+
         // 방향 설정하기
         Vector3 dir = new Vector3(axix.x, 0, axix.y);
-        dir = dir.normalized;
 
         // 상대좌표
         dir = rig.transform.TransformDirection(dir);
+
+        dir = dir.normalized;
+
+
 
         // 이동하기
         transform.position += dir * speed * Time.deltaTime;

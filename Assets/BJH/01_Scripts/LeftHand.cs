@@ -9,13 +9,19 @@ public class LeftHand : MonoBehaviour
     public GameObject light;
     bool lightState = false;
 
+    // ¼ÕÀüµî on/off audio
+    AudioSource audio;
+
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         inven.SetActive(false);
 
         lightGo.SetActive(false);
         light.SetActive(false);
         lightState = false;
+
+        audio.enabled = false;
     }
 
     void Update()
@@ -33,12 +39,18 @@ public class LeftHand : MonoBehaviour
                 lightGo.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
                 lightGo.SetActive(true);
                 light.SetActive(true);
+                audio.enabled = true;
+                audio.Play();
+
+
                 lightState = true;
             }
             else
             {
                 lightGo.SetActive(false);
                 light.SetActive(false);
+                audio.Play();
+
                 lightState = false;
             }
         }
