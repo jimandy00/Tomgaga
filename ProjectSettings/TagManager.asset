@@ -9,6 +9,7 @@ TagManager:
   - Handle
   - Slot
   - Grabbable
+  - Dialogue
   layers:
   - Default
   - TransparentFX

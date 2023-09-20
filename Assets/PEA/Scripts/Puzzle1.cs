@@ -16,6 +16,8 @@ public class Puzzle1 : MonoBehaviour
 
     public RevolvingDoor revolvingDoor;
     public Handle[] handles;
+    public Dialogue clearDialogue;
+    public Dialogue failDialogue;
 
     private void Awake()
     {
@@ -61,5 +63,7 @@ public class Puzzle1 : MonoBehaviour
             handle.ResetHandle();
         }
         revolvingDoor.ResetRevolvingDoor();
+
+        failDialogue.ShowDialogue();
     }
 }

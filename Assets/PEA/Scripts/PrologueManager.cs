@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PrologueManager : MonoBehaviour
 {
@@ -44,14 +45,6 @@ public class PrologueManager : MonoBehaviour
         }
     }
 
-    public void FadeOutImage()
-    {
-        if(coroutine == null)
-        {
-            coroutine = StartCoroutine(IFadeOutImgae());
-        }
-    }
-
     IEnumerator IShowImage(int spriteNum)
     {
         while (color.a > 0)
@@ -71,11 +64,17 @@ public class PrologueManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        if(spriteNum == prologueSprites.Length - 1)
+        {
+            yield return IFadeOutImage();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
         coroutine = null;
         yield return null;
     }
 
-    IEnumerator IFadeOutImgae()
+    IEnumerator IFadeOutImage()
     {
         while (color.a > 0)
         {
@@ -83,5 +82,8 @@ public class PrologueManager : MonoBehaviour
             curImage.color = color;
             yield return new WaitForEndOfFrame();
         }
+
+
+        yield return new WaitForSeconds(0.5f);
     }
 }
