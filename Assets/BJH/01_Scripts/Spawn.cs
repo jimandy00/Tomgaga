@@ -33,7 +33,6 @@ public class Spawn : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print("스폰 포인트에 닿은 물체 : " + collision.gameObject.name);
-
         if(collision.gameObject.name.CompareTo("Player") == 0)
         {
             savedSpawnPoint.position = transform.position;
