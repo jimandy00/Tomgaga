@@ -16,12 +16,15 @@ public class RevolvingDoor : MonoBehaviour
     private readonly float failRotY = 0;
     private readonly float rightRotY = -90;
 
+    private AudioSource audioSource;
 
     [Tooltip("숫자 커질수록 느려짐")]public float turnSpeed = 1f;
     public AnimationCurve animationCurve;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         eulerAngle = originEulerAngle = failRot = rightRot = transform.eulerAngles;
         failRot.y = failRotY;
         rightRot.y = rightRotY;

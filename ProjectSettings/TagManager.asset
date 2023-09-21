@@ -11,6 +11,7 @@ TagManager:
   - Grabbable
   - Dialogue
   - Dialogue_Ray
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,11 @@ public class Dialogue : MonoBehaviour
     public bool isPrologue = false;
     public bool oneTime = false;
 
+    public bool CanShow
+    {
+        get { return canShow; }
+    }
+
     public void ShowDialogue()
     {
         if (canShow)

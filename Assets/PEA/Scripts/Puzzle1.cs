@@ -13,10 +13,18 @@ public class Puzzle1 : MonoBehaviour
     }
 
     private HandleState handleState = HandleState.None;
+    private bool isCompleted = false;
+
+    public bool IsCoimpleted
+    {
+        get { return isCompleted; }
+    }
 
     public RevolvingDoor revolvingDoor;
     public Handle[] handles;
-    public Dialogue clearDialogue;
+    public Dialogue entryDialogue;
+    public Dialogue hintDialogue;
+    public Dialogue doorOpenDialogue;
     public Dialogue failDialogue;
 
     private void Awake()
@@ -35,13 +43,20 @@ public class Puzzle1 : MonoBehaviour
         {
             RotRevolvingDoor(Handle.HandleType.Right);
         }
+
+        if( !isCompleted && !entryDialogue.CanShow && hintDialogue.CanShow)
+        {
+            hintDialogue.ShowDialogue();
+        }
     }
 
     public void RotRevolvingDoor(Handle.HandleType handleType)
     {
+        doorOpenDialogue.ShowDialogue();
         if(handleType == Handle.HandleType.Right)
         {
             handleState = HandleState.Right;
+            isCompleted = true;
         }
         else
         {

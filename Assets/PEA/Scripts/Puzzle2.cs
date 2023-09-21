@@ -7,7 +7,7 @@ public class Puzzle2 : MonoBehaviour
     public static Puzzle2 instance = null;
 
     private bool isTrapStart = false;
-    private bool isComplete = false;
+    private bool isCompleted = false;
 
     public Puzzle2_Mural[] murals;
     public Trap2 trap2;
@@ -16,9 +16,9 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue clearDialogue;
     public Dialogue failDialogue;
 
-    public bool IsComplete
+    public bool IsCompleted
     {
-        get { return isComplete; }
+        get { return isCompleted; }
     }
 
     private void Awake()
@@ -38,13 +38,13 @@ public class Puzzle2 : MonoBehaviour
             if (mural.HasStone)
             {
                 firstStoneDialogue.ShowDialogue();
-                print(isComplete);
+                print(isCompleted);
                 return;
             }
         }
 
-        isComplete = true;
-        print(isComplete);
+        isCompleted = true;
+        print(isCompleted);
     }
 
     public void ResetPuzzle()

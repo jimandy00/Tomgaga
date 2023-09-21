@@ -9,13 +9,14 @@ public class DialogueManager : MonoBehaviour
 
     private string curShowingDialogue;
     private Coroutine coroutine = null;
-
-    public string dialogueCSVPath;
-
-    public TMP_Text dialogueText;
+    private AudioSource dialogueAudioSource;
 
     private Dictionary<int, string> dialogues = new Dictionary<int, string>();
 
+    public string dialogueCSVPath;
+    public TMP_Text dialogueText;
+
+    public AudioClip[] dialogueAudioClips;
 
     private void Awake()
     {
@@ -29,9 +30,11 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     void Start()
     {
         ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
+        dialogueAudioSource = GetComponent<AudioSource>();
     }
 
     public void ReadDialogueCSV(TextAsset csvData)
@@ -57,6 +60,8 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue)
     {
         PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
+        dialogueAudioSource.PlayOneShot(dialogueAudioClips[dialogueNum - 1]);
+
         if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
         {
             for (int i = 0; i < curShowingDialogue.Length; i++)
