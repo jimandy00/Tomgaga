@@ -6,6 +6,8 @@ public class LeftHand : MonoBehaviour
 {
     public GameObject inven;
     public GameObject lightGo;
+
+    // ¼ÕÀüµî
     public GameObject light;
     bool lightState = false;
 
@@ -36,7 +38,7 @@ public class LeftHand : MonoBehaviour
         {
             if(lightState == false)
             {
-                lightGo.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
+                lightGo.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 lightGo.SetActive(true);
                 light.SetActive(true);
                 audio.enabled = true;

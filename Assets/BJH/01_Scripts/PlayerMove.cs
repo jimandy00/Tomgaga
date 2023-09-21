@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     // 속도
-    public float speed = 3f;
+    public float speed;
+    public float walkSpeed = 0.5f;
 
     // 카메라
     public GameObject rig;
@@ -15,35 +16,66 @@ public class PlayerMove : MonoBehaviour
     // 움직이는 상태
     bool isMoving;
 
-    // 오디오
-    AudioSource audio;
+    // audio
+    public AudioSource walkAudio;
+    public AudioSource dashAudio;
 
-    // 
+
+    // dash
+    // dash 속도
+    public float dashSpeed = 1.5f;
+
+    // dash 판별
+    bool isDash;
+
+    // Controller
+    public OVRInput.Controller controller;
+    public OVRInput.Button dashBtn;
+    public OVRInput.Axis2D moveStick;
 
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
-        
+        speed = walkSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         // 이동값 가져오기
-        Vector2 axix = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
+        Vector2 axix = OVRInput.Get(moveStick, controller);
 
         // Vector2는 reference가 아니라서 value값임. 그래서 vector2.zero로 해야됨!!
         if(axix != Vector2.zero && isMoving == false) // 안움직이다가 움직이게 됐을 때
         {
-            audio.Play();
-            audio.loop = true;
+            walkAudio.Play();
+            walkAudio.loop = true;
             isMoving = true;
         }
         else if(axix == Vector2.zero)
         {
-            audio.loop = false;
+            walkAudio.loop = false;
             isMoving = false;
+        }
+
+        if (OVRInput.Get(dashBtn, controller))
+        {
+            print("dash 버튼을 눌렀습니다.");
+            if (isDash == false)
+            {
+                isDash = true;
+                speed = dashSpeed;
+                dashAudio.Play();
+                dashAudio.loop = true;
+            }
+        }
+        else
+        {
+            isDash = false;
+            speed = walkSpeed;
+            dashAudio.loop = false;
+
+
         }
 
 

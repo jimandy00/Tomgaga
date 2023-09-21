@@ -8,35 +8,35 @@ using UnityEngine.UI;
 // 플레이어가 죽음 상태일 때 스폰 포인트에 플레이어를 위치시킨다.
 public class Spawn : MonoBehaviour
 {
-    bool playerState = true;
-    Transform savedSpawn;
+    public GameObject player;
+    bool playerState;
+    Transform savedSpawnPoint;
 
-    public GameObject spawnPoint;
-    public GameObject Player;
-
+    
     // Start is called before the first frame update
     void Start()
     {
+        playerState = true;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Collider[] cols = Physics.OverlapSphere(transform.position, 20f);
-
-        for (int i = 0; i < cols.Length; i++)
+        if (playerState == false || Input.GetKeyDown(KeyCode.Q))
         {
-            if (cols[i].name == "Player")
-            {
-                savedSpawn = spawnPoint.transform;
-                
-            }
+            player.transform.position = savedSpawnPoint.position;
         }
 
-        if(playerState == false || Input.GetKeyDown(KeyCode.Q)) // 플레이어가 죽음
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("스폰 포인트에 닿은 물체 : " + collision.gameObject.name);
+
+        if(collision.gameObject.name.CompareTo("Player") == 0)
         {
-            Player.transform.position = savedSpawn.position;
+            savedSpawnPoint.position = transform.position;
         }
     }
 }
