@@ -51,7 +51,7 @@ public class Mouse : MonoBehaviour
         {
             if (hit.transform.TryGetComponent<Hole>(out Hole hole))
             {
-                hole.GetStone(curSphere);
+                hole.PutStone(curSphere);
             }
         }
     }

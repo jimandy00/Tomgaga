@@ -51,6 +51,7 @@ public class Puzzle2 : MonoBehaviour
         }
 
         isCompleted = true;
+        trap2.enabled = false;
         GameManager.instance.PuzzleClear();
         print(isCompleted);
     }
