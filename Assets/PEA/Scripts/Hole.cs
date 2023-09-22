@@ -13,7 +13,15 @@ public class Hole : MonoBehaviour
         spherePos = transform.GetChild(0);
     }
 
-    public void GetStone(GameObject stone)
+    // 구멍에서 돌을 꺼내는 함수
+    public void TakeStoneOut()
+    {
+        hasStone = false;
+        Puzzle3.instance.CheckIsAnswer(isAnswer);
+    }
+
+    // 돌을 구멍에 끼워넣는 함수
+    public void PutStone(GameObject stone)
     {
         hasStone = true;
         stone.transform.SetParent(spherePos);
@@ -23,21 +31,21 @@ public class Hole : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name.Contains("Stone") && !hasStone)
-        {
-            hasStone = true;
-            collision.transform.SetParent(spherePos);
-            collision.transform.position = spherePos.position;
-        }
+        //if (collision.gameObject.name.Contains("Stone") && !hasStone)
+        //{
+        //    hasStone = true;
+        //    collision.transform.SetParent(spherePos);
+        //    collision.transform.position = spherePos.position;
+        //}
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if(hasStone && collision.gameObject.name.Contains("Stone"))
-        {
-            hasStone = false;
-            collision.transform.SetParent(null);
-            Puzzle3.instance.CheckIsAnswer(isAnswer);
-        }
+        //if(hasStone && collision.gameObject.name.Contains("Stone"))
+        //{
+        //    hasStone = false;
+        //    collision.transform.SetParent(null);
+        //    Puzzle3.instance.CheckIsAnswer(isAnswer);
+        //}
     }
 }

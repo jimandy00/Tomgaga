@@ -59,7 +59,11 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue)
     {
-        PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
+        if (isPrologue)
+        {
+            PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
+        }
+
         dialogueAudioSource.PlayOneShot(dialogueAudioClips[dialogueNum - 1]);
 
         if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
