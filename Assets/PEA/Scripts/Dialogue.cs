@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
+    private bool canShow = true;
+
     public int dialogueNum;
     public int dialogueEndNum;
     public bool isPrologue = false;
+    public bool oneTime = false;
 
-    public void ShowDialogue(System.Action action = null)
+    public void ShowDialogue()
     {
-        DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue, action);
+        if (canShow)
+        {
+            DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue);
+
+            if (oneTime)
+            {
+                canShow = false;
+            }
+        }
     }
 }
