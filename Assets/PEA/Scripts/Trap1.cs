@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trap1 : MonoBehaviour
 {
     public ParticleSystem[] fires;
+    public AudioSource fireAudioSource;
 
     public void Fire()
     {
@@ -12,6 +13,7 @@ public class Trap1 : MonoBehaviour
         {
             ps.Play();
         }
+        fireAudioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
 
     public Puzzle1 puzzle1;
     public Puzzle2 puzzle2;
+    public AudioClip puzzleClearAudioClip;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         
@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PuzzleClear()
+    {
+        SoundManagaer.instance.PlaySFX(puzzleClearAudioClip);
     }
 
     // 플레이어 리스폰 될 때 퍼즐, 트랩 리셋.

@@ -6,16 +6,11 @@ public class Hole : MonoBehaviour
 {
     private Transform spherePos;
     public bool isAnswer = false;                // 황소자리를 구성하는 구멍인지 아닌지
-    public bool hasStone = false;                 // 돌이 껴있는지 아닌지
+    public bool hasStone = false;                // 돌이 껴있는지 아닌지
 
     void Start()
     {
         spherePos = transform.GetChild(0);
-    }
-
-    void Update()
-    {
-        
     }
 
     public void GetStone(GameObject stone)
@@ -23,7 +18,7 @@ public class Hole : MonoBehaviour
         hasStone = true;
         stone.transform.SetParent(spherePos);
         stone.transform.position = spherePos.position;
-        HoleManager.instance.CheckIsAnswer();
+        Puzzle3.instance.CheckIsAnswer(isAnswer);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,7 +37,7 @@ public class Hole : MonoBehaviour
         {
             hasStone = false;
             collision.transform.SetParent(null);
-            HoleManager.instance.CheckIsAnswer();
+            Puzzle3.instance.CheckIsAnswer(isAnswer);
         }
     }
 }

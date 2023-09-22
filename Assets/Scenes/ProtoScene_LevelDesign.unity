@@ -1399,7 +1399,9 @@ MonoBehaviour:
   handles:
   - {fileID: 6916028616700111050}
   - {fileID: 265439600}
-  clearDialogue: {fileID: 0}
+  entryDialogue: {fileID: 0}
+  hintDialogue: {fileID: 0}
+  doorOpenDialogue: {fileID: 0}
   failDialogue: {fileID: 0}
 --- !u!64 &48910863
 MeshCollider:

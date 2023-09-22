@@ -15,6 +15,7 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue firstStoneDialogue;
     public Dialogue clearDialogue;
     public Dialogue failDialogue;
+    public ParticleSystem fragmentParticle;
 
     public bool IsCompleted
     {
@@ -24,6 +25,12 @@ public class Puzzle2 : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void EntryPuzzles2()
+    {
+        fragmentParticle.Play();
+        // ÁöÁø
     }
 
     public void CheckIsComplete()
@@ -44,6 +51,7 @@ public class Puzzle2 : MonoBehaviour
         }
 
         isCompleted = true;
+        GameManager.instance.PuzzleClear();
         print(isCompleted);
     }
 
@@ -55,5 +63,13 @@ public class Puzzle2 : MonoBehaviour
             mural.ResetMural();
         }
         trap2.ResetTrap();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            EntryPuzzles2();
+        }
     }
 }
