@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,15 +22,12 @@ public class PlayerMove : MonoBehaviour
     public AudioSource dashAudio;
 
 
-    // dash
-    // dash 속도
-    public float dashSpeed = 1.5f;
 
-    // dash 판별
     bool isDash;
 
     // Controller
-    public OVRInput.Controller controller;
+    public OVRInput.Controller lController;
+    public OVRInput.Controller RController;
     public OVRInput.Button dashBtn;
     public OVRInput.Axis2D moveStick;
 
@@ -37,13 +35,17 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         speed = walkSpeed;
+        rd = GetComponent<Rigidbody>();
+        isDash = false;
+
+        dashAudio.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         // 이동값 가져오기
-        Vector2 axix = OVRInput.Get(moveStick, controller);
+        Vector2 axix = OVRInput.Get(moveStick, lController);
 
         // Vector2는 reference가 아니라서 value값임. 그래서 vector2.zero로 해야됨!!
         if(axix != Vector2.zero && isMoving == false) // 안움직이다가 움직이게 됐을 때
@@ -58,24 +60,15 @@ public class PlayerMove : MonoBehaviour
             isMoving = false;
         }
 
-        if (OVRInput.Get(dashBtn, controller))
+        if (OVRInput.Get(dashBtn, RController) && !isDash)
         {
-            print("dash 버튼을 눌렀습니다.");
-            if (isDash == false)
-            {
-                isDash = true;
-                speed = dashSpeed;
-                dashAudio.Play();
-                dashAudio.loop = true;
-            }
+            Debug.Log("dash 버튼을 눌렀습니다.");
+            Dash();
         }
-        else
+
+        else if(OVRInput.GetUp(dashBtn, RController) && isDash)
         {
-            isDash = false;
-            speed = walkSpeed;
-            dashAudio.loop = false;
-
-
+            EndDash();
         }
 
 
@@ -108,5 +101,43 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+
+
+
+    // dash
+    Rigidbody rd;
+    public float dashSpeed = 10f;
+
+    private void Dash()
+    {
+        //rd.AddForce(transform.forward * dashSpeed, ForceMode.Impulse);
+        isDash = true;
+        speed = dashSpeed;
+        dashAudio.enabled = true;
+        dashAudio.loop = true;
+        //StartCoroutine(CoDash());
+    }
+
+    private void EndDash()
+    {
+        isDash = false;
+        speed = walkSpeed;
+        dashAudio.enabled = false;
+        dashAudio.loop = false;
+
+    }
+
+
+
+    public float dashTime;
+    //IEnumerator CoDash()
+    //{
+    //    dashAudio.enabled = true;
+    //    dashAudio.loop = true;
+    //    yield return new WaitForSeconds(dashTime);
+    //    isDash = false;
+    //    dashAudio.enabled = false;
+    //    dashAudio.loop = false;
+    //}
 }
 
