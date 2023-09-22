@@ -5,9 +5,22 @@ using UnityEngine;
 public class LeftHand : MonoBehaviour
 {
     public GameObject inven;
+    bool invenState;
+
     public GameObject lightGo;
+
+    // ¼ÕÀüµî
     public GameObject light;
     bool lightState = false;
+
+    // ¼ÕÀüµî on/off audio
+    public AudioSource lightAudio;
+
+    public AudioSource invenOpenAudio;
+    public AudioSource invenCloseAudio;
+
+
+
 
     void Start()
     {
@@ -16,29 +29,49 @@ public class LeftHand : MonoBehaviour
         lightGo.SetActive(false);
         light.SetActive(false);
         lightState = false;
+
+        lightAudio.enabled = false;
     }
 
     void Update()
     {
-        if(OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch))
+        if(OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch) || Input.GetKeyDown(KeyCode.I))
         {
-            print(inven.activeSelf);
-            inven.SetActive(!inven.activeSelf); // ÄÑÁ®ÀÖÀ¸¸é ²¨Áö°í ²¨Á®ÀÖÀ¸¸é ÄÑÁü
+            if(invenState == false)
+            {
+                inven.SetActive(true);
+                invenState = true;
+                invenOpenAudio.Play();
+            }
+
+            else if(invenState == true)
+            {
+                inven.SetActive(false);
+                invenState = false;
+                invenCloseAudio.Play();
+            }
+            //inven.SetActive(!inven.activeSelf); // ÄÑÁ®ÀÖÀ¸¸é ²¨Áö°í ²¨Á®ÀÖÀ¸¸é ÄÑÁü
         }
 
         if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             if(lightState == false)
             {
-                lightGo.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
+                lightGo.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 lightGo.SetActive(true);
                 light.SetActive(true);
+                lightAudio.enabled = true;
+                lightAudio.Play();
+
+
                 lightState = true;
             }
             else
             {
                 lightGo.SetActive(false);
                 light.SetActive(false);
+                lightAudio.Play();
+
                 lightState = false;
             }
         }
