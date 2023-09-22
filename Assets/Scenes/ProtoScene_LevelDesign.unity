@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0.07699328, b: 0.21698111, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.19
@@ -4334,6 +4334,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7723565514421396198, guid: efed897e72040134bbdf840432405ad9, type: 3}
+--- !u!1 &139802900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b28ec553d95c4a14c8c777cdf2a7bba3, type: 3}
+  m_PrefabInstance: {fileID: 901252667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &147065167
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4594,7 +4599,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  walkSpeed: 0.5
   rig: {fileID: 1808809813}
+  walkAudio: {fileID: 0}
+  dashAudio: {fileID: 0}
+  lController: 0
+  RController: 0
+  dashBtn: 0
+  moveStick: 0
+  dashSpeed: 10
+  dashTime: 0
 --- !u!54 &155988288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4653,8 +4667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0408fa2f1db5e1849a311e73ac292cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
-  Player: {fileID: 0}
 --- !u!136 &155988293
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12056,8 +12068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0408fa2f1db5e1849a311e73ac292cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 488932922}
-  Player: {fileID: 155988278}
 --- !u!64 &489451099
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12867,6 +12877,9 @@ MonoBehaviour:
   inven: {fileID: 1867354524}
   lightGo: {fileID: 1857716974}
   light: {fileID: 2005786226}
+  lightAudio: {fileID: 0}
+  invenOpenAudio: {fileID: 0}
+  invenCloseAudio: {fileID: 0}
 --- !u!4 &522883707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 414912, guid: e6ba3498ffa1e534b91a07264266e6b8, type: 3}
@@ -13416,8 +13429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0408fa2f1db5e1849a311e73ac292cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 561355723}
-  Player: {fileID: 155988278}
 --- !u!64 &561815866
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22968,8 +22979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0408fa2f1db5e1849a311e73ac292cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 873696704}
-  Player: {fileID: 155988278}
 --- !u!1001 &876590356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23653,6 +23662,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b28ec553d95c4a14c8c777cdf2a7bba3, type: 3}
   m_PrefabInstance: {fileID: 901252667}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &901252671
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139802900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 694557808589879814, guid: b28ec553d95c4a14c8c777cdf2a7bba3, type: 3}
 --- !u!1 &905024476
 GameObject:
   m_ObjectHideFlags: 0
@@ -39632,7 +39655,9 @@ MonoBehaviour:
   handles:
   - {fileID: 174592128}
   - {fileID: 335628272}
-  clearDialogue: {fileID: 0}
+  entryDialogue: {fileID: 0}
+  hintDialogue: {fileID: 0}
+  doorOpenDialogue: {fileID: 0}
   failDialogue: {fileID: 0}
 --- !u!1 &1547301355
 GameObject:

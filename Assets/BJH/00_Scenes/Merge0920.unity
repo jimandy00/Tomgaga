@@ -717,6 +717,10 @@ MonoBehaviour:
   handles:
   - {fileID: 6916028616700111050}
   - {fileID: 265439600}
+  entryDialogue: {fileID: 0}
+  hintDialogue: {fileID: 0}
+  doorOpenDialogue: {fileID: 0}
+  failDialogue: {fileID: 0}
 --- !u!64 &48910863
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1624,11 +1628,11 @@ MonoBehaviour:
   rig: {fileID: 1808809813}
   walkAudio: {fileID: 155988295}
   dashAudio: {fileID: 155988296}
-  dashSpeed: 1.5
   lController: 1
   RController: 2
   dashBtn: 1
   moveStick: 1
+  dashSpeed: 1.5
   dashTime: 1.5
 --- !u!54 &155988288
 Rigidbody:
@@ -11582,6 +11586,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ed805fddaecab4593ca14331090863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!64 &1476036463
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14596,6 +14607,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1527892340112262678, guid: efed897e72040134bbdf840432405ad9, type: 3}
+--- !u!1 &1960670864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960670866}
+  - component: {fileID: 1960670865}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960670865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960670864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0d33d3169d03644bcf05e42a400bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1960670866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960670864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.946, y: 0.5255, z: -29.500395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1960677655
 MeshCollider:
   m_ObjectHideFlags: 0
