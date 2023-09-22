@@ -24,8 +24,11 @@ public class FallingLoad : MonoBehaviour
     private Vector3 leftEulerAngle;
     private Vector3 rightEulerAngle;
 
+    private Dialogue fallLoadDialogue;
+
     void Start()
     {
+        fallLoadDialogue = GetComponent<Dialogue>();
         left = transform.GetChild(0);
         right = transform.GetChild(1);
         foreach(Transform tr in left)
@@ -45,7 +48,7 @@ public class FallingLoad : MonoBehaviour
             case LoadState.idle:
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    loadState = LoadState.Fall;
+                    FallingStart();
                 }
                 break;
 
@@ -104,6 +107,20 @@ public class FallingLoad : MonoBehaviour
                     loadState = LoadState.idle;
                 }
                 break;
+        }
+    }
+
+    private void FallingStart()
+    {
+        loadState = LoadState.Fall;
+        fallLoadDialogue.ShowDialogue();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            FallingStart();
         }
     }
 }
