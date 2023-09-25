@@ -823,12 +823,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curImage: {fileID: 1195586315}
   prologueSprites:
-  - {fileID: 21300000, guid: bedf2d7152b8bc541a307fb313734c8e, type: 3}
-  - {fileID: 21300000, guid: b1f4e045c7492824da0c97909e4d3251, type: 3}
-  - {fileID: 21300000, guid: 4dfa741b639be04499fe60e5ad3b2757, type: 3}
-  - {fileID: 21300000, guid: c30639f4198b8af4e8997331af762f9e, type: 3}
-  - {fileID: 21300000, guid: dde5a706cd09c60488bec195d9b94205, type: 3}
-  - {fileID: 21300000, guid: 674546745d05d86428019bd23c2fca51, type: 3}
+  - {fileID: 21300000, guid: 6d13b5887b8845945a9cd4bd5c20893e, type: 3}
+  - {fileID: 21300000, guid: f28519436476e3040be08a75a12bc163, type: 3}
+  - {fileID: 21300000, guid: 61266c639841076419c3fe0772195684, type: 3}
+  - {fileID: 21300000, guid: 6970ded02be7371468385e6d5dc8f9ea, type: 3}
+  - {fileID: 21300000, guid: 58bf86a8b8fbc9e4195ce2eaffa0ddb7, type: 3}
+  - {fileID: 21300000, guid: ebdae0f512276484181a5a33a36524ad, type: 3}
 --- !u!1 &786284900
 GameObject:
   m_ObjectHideFlags: 0

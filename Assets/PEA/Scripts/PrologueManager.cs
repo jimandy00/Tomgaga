@@ -31,7 +31,7 @@ public class PrologueManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space )&& !isSTart)
+        if((Input.GetKeyDown(KeyCode.Space ) || OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))&& !isSTart)
         {
             prologueDialogue.ShowDialogue(); 
         }
