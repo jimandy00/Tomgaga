@@ -11,9 +11,10 @@ using UnityEngine.UI;
 public class PlayerDie : MonoBehaviour
 {
     public Spawn spawn;
+    Player player;
 
     [SerializeField]
-    PlayerMove player;
+    PlayerMove playerMove;
     public AudioSource audioSource;
 
     public OVRInput.Button Abutton; // one
@@ -60,7 +61,7 @@ public class PlayerDie : MonoBehaviour
         uiObject.SetActive(false);
         ui = uiObject.GetComponent<Image>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>(); // 모든 컴포넌트 가져오기 없지롱
+        playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>(); // 모든 컴포넌트 가져오기 없지롱
 
         originColor = ui.color;
 
@@ -83,7 +84,7 @@ public class PlayerDie : MonoBehaviour
     void Update()
     {
         // 플레이어가 죽었고, 오디오가 플레이되지 않았으면
-        if (spawn.playerState == false && audioState == false)
+        if (player.playerState == false && audioState == false)
         {
             PlayAudio(2);
             Die();
@@ -103,6 +104,7 @@ public class PlayerDie : MonoBehaviour
         audioState = true;
     }
 
+    // 플레이어 죽음
     public void Die()
     {
         uiObject.SetActive(true);
@@ -152,11 +154,8 @@ public class PlayerDie : MonoBehaviour
             coroutine = StartCoroutine(CoABtn());
         }
 
-        print("123123123123123");
-
         if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
         {
-            print("z버튼을 눌렀습니다.");
             // 버튼 클릭하는 소리
             audioSource.clip = audio[3];
 
@@ -165,7 +164,7 @@ public class PlayerDie : MonoBehaviour
             //transform.position = spawn.savedSpawnPoint;
 
             // 플레이어 살아남
-            spawn.playerState = true;
+            player.playerState = true;
 
             // 오디오 초기화
             audioState = false;
@@ -206,7 +205,7 @@ public class PlayerDie : MonoBehaviour
         if(other.CompareTag("DieTrap"))
         {
             print("0000000000");
-            spawn.playerState = false;
+            player.playerState = false;
             //Die();
         }
     }
