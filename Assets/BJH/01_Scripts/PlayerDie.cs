@@ -48,6 +48,8 @@ public class PlayerDie : MonoBehaviour
     public Text aBtn;
     float aBtnDuration = 1f;
 
+    private Coroutine coroutine = null;
+
 
     void Start()
     {
@@ -68,7 +70,9 @@ public class PlayerDie : MonoBehaviour
 
         brushImage = brushObject.GetComponent<Image>();
         brushOriginColor = brushImage.color;
-        brushTransColor = new Color(brushOriginColor.r, brushOriginColor.g, brushOriginColor.b, 0f);
+        print("브러쉬" + brushOriginColor);
+        brushTransColor = brushOriginColor;
+        brushTransColor.a = 0f;
         brushImage.color = brushTransColor; // 투명하게 시작
         print("브러시 이미지 컬러값 : " + brushImage.color);
 
@@ -129,7 +133,8 @@ public class PlayerDie : MonoBehaviour
         while (time02 < fadeDuration2)
         {
             float alpha = Mathf.Lerp(0f, 1f, time02 / fadeDuration2);
-            brushImage.color = new Color(originColor.r, originColor.g, originColor.b, alpha); // brush
+            brushTransColor.a = alpha;
+            brushImage.color = brushTransColor;
             time02 += Time.deltaTime;
             yield return null;
         }
@@ -141,7 +146,10 @@ public class PlayerDie : MonoBehaviour
 
     private void Retry()
     {
-        StartCoroutine(CoABtn());
+        if(coroutine == null)
+        {
+            coroutine = StartCoroutine(CoABtn());
+        }
 
         if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
         {
@@ -182,5 +190,7 @@ public class PlayerDie : MonoBehaviour
             yield return new WaitForSeconds(aBtnDuration);
         }
         aBtn.gameObject.SetActive(false);
+        coroutine = null;
+        yield return null;        
     }
 }
