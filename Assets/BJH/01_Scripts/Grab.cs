@@ -31,7 +31,7 @@ public class Grab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        hole = GetComponent<Hole>();
     }
 
     // Update is called once per frame
@@ -132,19 +132,47 @@ public class Grab : MonoBehaviour
         return nearest.gameObject;
     }
 
+    GameObject stone;
+    bool isStone;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Slot"))
         {
             slot = other.GetComponent<Slot>();
         }
+        // 만약 other이 돌이라면?
+        else if(other.CompareTag("Stone"))
+        {
+            // 함수 실행
+            hole.TakeStoneOut();
+
+            // 돌을 잡았다!
+            isStone = true;
+
+            // 잡은 돌을 stone에 대입
+            stone = other.gameObject;
+
+            // 돌의 위치를 손 살짝 위로 옮긴다.
+            other.transform.position = getGoPosition.transform.position;
+        }
     }
 
+    Hole hole;
     private void OnTriggerExit(Collider other)
     {
         if(slot != null && other.gameObject == slot.gameObject)
         {
             slot = null;
+        }
+
+        // 만약 other 구멍이라면?
+        // 그리고 손에 돌이 들려있다면?
+        if(other.CompareTag("Hole") && isStone == true)
+        {
+            hole.PutStone(stone);
+
+            // 돌을 내려놨다.
+            isStone = false;
         }
     }
 }

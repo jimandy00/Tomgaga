@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public AudioSource walkAudio;
     public AudioSource dashAudio;
 
-
+    public Spawn spawn;
 
     bool isDash;
 
@@ -44,6 +44,13 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 플레이어 임의로 죽이기
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log("플레이어를 죽였습니다.");
+            spawn.playerState = false;
+        }
+
         // 이동값 가져오기
         Vector2 axix = OVRInput.Get(moveStick, lController);
 
