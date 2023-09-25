@@ -22,16 +22,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void PuzzleClear()
     {
         SoundManagaer.instance.PlaySFX(puzzleClearAudioClip);
