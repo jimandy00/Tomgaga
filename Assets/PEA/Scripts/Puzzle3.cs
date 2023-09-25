@@ -65,6 +65,6 @@ public class Puzzle3 : MonoBehaviour
 
     public void PlaySoundAnswerOrNot(bool isAnswer)
     {
-        audioSource.PlayOneShot(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
+        //audioSource.PlayOneShot(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
     }
 }

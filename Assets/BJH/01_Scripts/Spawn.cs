@@ -12,28 +12,27 @@ public class Spawn : MonoBehaviour
 {
     public bool playerState;
 
-    public Transform savedSpawnPoint;
+    public Vector3 savedSpawnPoint;
     
     // Start is called before the first frame update
     void Start()
     {
         playerState = true;
-        savedSpawnPoint = transform;
+        savedSpawnPoint = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        reSpawn();
+        //ReSpawn();
     }
 
-    private void reSpawn()
+    PlayerDie pd;
+    public void ReSpawn()
     {
-        if (playerState == false || Input.GetKeyDown(KeyCode.Q))
-        {
-            transform.position = savedSpawnPoint.position;
-            Debug.Log("플레이어를 " + savedSpawnPoint + "로 이동 시켰습니다.");
-        }
+        transform.position = savedSpawnPoint;
+        Debug.Log("플레이어를 " + savedSpawnPoint + "로 이동 시켰습니다.");
+        GameManager.instance.PuzzlesReset();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +43,7 @@ public class Spawn : MonoBehaviour
         if (name.Contains("Spawn"))
         {
             print("플레이어가 트리거에 닿았습니다.");
-            savedSpawnPoint = other.gameObject.transform;
+            savedSpawnPoint = other.gameObject.transform.position;
         }
     }
 }

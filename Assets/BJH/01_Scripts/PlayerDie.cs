@@ -50,6 +50,8 @@ public class PlayerDie : MonoBehaviour
 
     private Coroutine coroutine = null;
 
+    
+
 
     void Start()
     {
@@ -70,11 +72,9 @@ public class PlayerDie : MonoBehaviour
 
         brushImage = brushObject.GetComponent<Image>();
         brushOriginColor = brushImage.color;
-        print("브러쉬" + brushOriginColor);
         brushTransColor = brushOriginColor;
         brushTransColor.a = 0f;
         brushImage.color = brushTransColor; // 투명하게 시작
-        print("브러시 이미지 컬러값 : " + brushImage.color);
 
 
     }
@@ -103,15 +103,16 @@ public class PlayerDie : MonoBehaviour
         audioState = true;
     }
 
-    private void Die()
+    public void Die()
     {
         uiObject.SetActive(true);
 
-        StartCoroutine(CoUi());
+        StartCoroutine(CoUi()); // ui 깜박깜박
 
-        print("코루틴을 벗어났습니다.");
-        Retry();
+        isRetry = true;
     }
+
+    
 
     IEnumerator CoUi()
     {
@@ -141,7 +142,7 @@ public class PlayerDie : MonoBehaviour
 
         ui.color = originColor;
         brushImage.color = brushOriginColor;
-        isRetry = true;
+        
     }
 
     private void Retry()
@@ -151,14 +152,17 @@ public class PlayerDie : MonoBehaviour
             coroutine = StartCoroutine(CoABtn());
         }
 
+        print("123123123123123");
+
         if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
         {
             print("z버튼을 눌렀습니다.");
             // 버튼 클릭하는 소리
             audioSource.clip = audio[3];
 
-            // 스폰 포인트에서 다시 시작
-            transform.position = spawn.savedSpawnPoint.position;
+
+            //// 스폰 포인트에서 다시 시작
+            //transform.position = spawn.savedSpawnPoint;
 
             // 플레이어 살아남
             spawn.playerState = true;
@@ -172,6 +176,8 @@ public class PlayerDie : MonoBehaviour
 
             // retry값 끄기
             isRetry = false;
+
+            //spawn.ReSpawn();
 
         }
     }
@@ -192,5 +198,16 @@ public class PlayerDie : MonoBehaviour
         aBtn.gameObject.SetActive(false);
         coroutine = null;
         yield return null;        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("999999999999999");
+        if(other.CompareTag("DieTrap"))
+        {
+            print("0000000000");
+            spawn.playerState = false;
+            //Die();
+        }
     }
 }

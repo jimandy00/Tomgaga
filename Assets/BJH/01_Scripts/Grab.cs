@@ -28,6 +28,8 @@ public class Grab : MonoBehaviour
     // 인벤에서 아이템 놓는 칸 하나하나
     private Slot slot;
 
+    private Puzzle2_Mural mural;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +41,8 @@ public class Grab : MonoBehaviour
     {
         if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-            if (isGrab == false)
-                return;
 
-            Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
+            Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Target"));
 
             if (slot != null)
             {
@@ -51,6 +51,7 @@ public class Grab : MonoBehaviour
             }
             else if (hole != null)
             {
+                print("h");
                 // 구멍에서 돌 꺼내기
                 grabGo = hole.TakeStoneOut();
             }
@@ -63,11 +64,12 @@ public class Grab : MonoBehaviour
                 if(grabGo.CompareTag("Stone"))
                 {
                     isStone = true;
+                    if(mural != null)
+                    {
+                        mural.IsStoneStay();
+                    }
                 }
             }
-
-
-
 
             grabGo.GetComponent<Rigidbody>().isKinematic = true;
             grabGo.transform.parent = getGoPosition.transform;
@@ -77,7 +79,6 @@ public class Grab : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-            print("111111111");
             Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
             for (int i = 0; i < cols.Length; i++)
             {
@@ -90,7 +91,7 @@ public class Grab : MonoBehaviour
                     }
 
                     Handle handle = cols[i].transform.GetComponent<Handle>();
-                    print(prevY);
+                    //print(prevY);
 
                     
 
@@ -110,6 +111,7 @@ public class Grab : MonoBehaviour
             }
             else if (hole != null && isStone == true)
             {
+                print("돌 넣기");
                 hole.PutStone(grabGo);
 
             }
@@ -135,8 +137,7 @@ public class Grab : MonoBehaviour
 
         foreach (Collider collider in cols)
         {
-            if (!collider.CompareTag("Target"))
-                continue;
+            
 
             float distance = Vector3.Distance(transform.position, collider.transform.position);
             if (distance < nearestDistance)
@@ -162,7 +163,13 @@ public class Grab : MonoBehaviour
         // 만약 other이 홀이라면?
         else if(other.CompareTag("Hole"))
         {
+            print("h enter");
             hole = other.GetComponent<Hole>();
+        }
+
+        else if (other.CompareTag("Mural"))
+        {
+            mural = other.GetComponent<Puzzle2_Mural>();
         }
     }
 
@@ -177,7 +184,13 @@ public class Grab : MonoBehaviour
         // 그리고 손에 돌이 들려있다면?
         if (hole != null && other.gameObject == hole.gameObject)
         {
+            print(" h exit");
             hole = null;
+        }
+
+        if(mural != null && other.gameObject == mural.gameObject)
+        {
+            mural = null;
         }
     }
 }
