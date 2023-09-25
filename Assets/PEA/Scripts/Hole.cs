@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hole : MonoBehaviour
 {
     private Transform spherePos;
+    private GameObject stone;
     public bool isAnswer = false;                // 황소자리를 구성하는 구멍인지 아닌지
     public bool hasStone = false;                // 돌이 껴있는지 아닌지
 
@@ -14,10 +15,16 @@ public class Hole : MonoBehaviour
     }
 
     // 구멍에서 돌을 꺼내는 함수
-    public void TakeStoneOut()
+    public GameObject TakeStoneOut()
     {
-        hasStone = false;
-        Puzzle3.instance.CheckIsAnswer(isAnswer);
+        if (hasStone)
+        {
+            hasStone = false;
+            Puzzle3.instance.CheckIsAnswer(isAnswer);
+            return stone;
+        }
+
+        return null;
     }
 
     // 돌을 구멍에 끼워넣는 함수
@@ -26,26 +33,8 @@ public class Hole : MonoBehaviour
         hasStone = true;
         stone.transform.SetParent(spherePos);
         stone.transform.position = spherePos.position;
+        stone.GetComponent<Rigidbody>().useGravity = false;
+        this.stone = stone;
         Puzzle3.instance.CheckIsAnswer(isAnswer);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.name.Contains("Stone") && !hasStone)
-        //{
-        //    hasStone = true;
-        //    collision.transform.SetParent(spherePos);
-        //    collision.transform.position = spherePos.position;
-        //}
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        //if(hasStone && collision.gameObject.name.Contains("Stone"))
-        //{
-        //    hasStone = false;
-        //    collision.transform.SetParent(null);
-        //    Puzzle3.instance.CheckIsAnswer(isAnswer);
-        //}
     }
 }

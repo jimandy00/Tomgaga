@@ -12,6 +12,8 @@ TagManager:
   - Dialogue
   - Dialogue_Ray
   - SpawnPoint
+  - Hole
+  - Stone
   layers:
   - Default
   - TransparentFX
