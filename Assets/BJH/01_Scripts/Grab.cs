@@ -39,10 +39,8 @@ public class Grab : MonoBehaviour
     {
         if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-            if (isGrab == false)
-                return;
 
-            Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
+            Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Target"));
 
             if (slot != null)
             {
@@ -51,6 +49,7 @@ public class Grab : MonoBehaviour
             }
             else if (hole != null)
             {
+                print("h");
                 // ±¸¸Û¿¡¼­ µ¹ ²¨³»±â
                 grabGo = hole.TakeStoneOut();
             }
@@ -66,9 +65,6 @@ public class Grab : MonoBehaviour
                 }
             }
 
-
-
-
             grabGo.GetComponent<Rigidbody>().isKinematic = true;
             grabGo.transform.parent = getGoPosition.transform;
             grabGo.transform.localPosition = Vector3.zero;
@@ -77,7 +73,6 @@ public class Grab : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-            print("111111111");
             Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f);
             for (int i = 0; i < cols.Length; i++)
             {
@@ -90,7 +85,7 @@ public class Grab : MonoBehaviour
                     }
 
                     Handle handle = cols[i].transform.GetComponent<Handle>();
-                    print(prevY);
+                    //print(prevY);
 
                     
 
@@ -135,8 +130,7 @@ public class Grab : MonoBehaviour
 
         foreach (Collider collider in cols)
         {
-            if (!collider.CompareTag("Target"))
-                continue;
+            
 
             float distance = Vector3.Distance(transform.position, collider.transform.position);
             if (distance < nearestDistance)

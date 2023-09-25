@@ -46,6 +46,7 @@ public class Handle : MonoBehaviour
 
             if(eulerAngle.x == maxRightRotX)
             {
+                print("right handle");
                 Puzzle1.instance.RotRevolvingDoor(handleType);
                 enabled = false;
             }
@@ -56,6 +57,7 @@ public class Handle : MonoBehaviour
             eulerAngle.x = Mathf.Clamp(eulerAngle.x, minLeftRotX, maxLeftRotX);
             if(eulerAngle.x == minLeftRotX)
             {
+                print("left handle");
                 Puzzle1.instance.RotRevolvingDoor(handleType);
                 enabled = false;
             }
