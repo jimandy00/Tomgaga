@@ -14,10 +14,11 @@ public class Hole : MonoBehaviour
     }
 
     // 구멍에서 돌을 꺼내는 함수
-    public void TakeStoneOut()
+    public GameObject TakeStoneOut()
     {
         hasStone = false;
         Puzzle3.instance.CheckIsAnswer(isAnswer);
+        return transform.GetChild(0).gameObject;
     }
 
     // 돌을 구멍에 끼워넣는 함수
