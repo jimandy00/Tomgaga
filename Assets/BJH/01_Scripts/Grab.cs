@@ -28,6 +28,8 @@ public class Grab : MonoBehaviour
     // 인벤에서 아이템 놓는 칸 하나하나
     private Slot slot;
 
+    private Puzzle2_Mural mural;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +64,10 @@ public class Grab : MonoBehaviour
                 if(grabGo.CompareTag("Stone"))
                 {
                     isStone = true;
+                    if(mural != null)
+                    {
+                        mural.IsStoneStay();
+                    }
                 }
             }
 
@@ -105,6 +111,7 @@ public class Grab : MonoBehaviour
             }
             else if (hole != null && isStone == true)
             {
+                print("돌 넣기");
                 hole.PutStone(grabGo);
 
             }
@@ -156,7 +163,13 @@ public class Grab : MonoBehaviour
         // 만약 other이 홀이라면?
         else if(other.CompareTag("Hole"))
         {
+            print("h enter");
             hole = other.GetComponent<Hole>();
+        }
+
+        else if (other.CompareTag("Mural"))
+        {
+            mural = other.GetComponent<Puzzle2_Mural>();
         }
     }
 
@@ -171,7 +184,13 @@ public class Grab : MonoBehaviour
         // 그리고 손에 돌이 들려있다면?
         if (hole != null && other.gameObject == hole.gameObject)
         {
+            print(" h exit");
             hole = null;
+        }
+
+        if(mural != null && other.gameObject == mural.gameObject)
+        {
+            mural = null;
         }
     }
 }

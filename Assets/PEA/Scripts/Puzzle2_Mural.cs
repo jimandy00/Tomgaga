@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Puzzle2_Mural : MonoBehaviour
 {
+    private int stoneCount = 0;
     private bool hasStone = true;
     private List<Vector3> stonesOriginPos = new List<Vector3>();
     private List<Quaternion> stonesOriginRot = new List<Quaternion>();
@@ -21,6 +22,7 @@ public class Puzzle2_Mural : MonoBehaviour
             stones.Add(tr.gameObject);
             stonesOriginPos.Add(tr.position);
             stonesOriginRot.Add(tr.rotation);
+            stoneCount++;
         }
     }
 
@@ -48,11 +50,27 @@ public class Puzzle2_Mural : MonoBehaviour
         }
     }
 
+    public void IsStoneStay()
+    {
+        foreach (GameObject stone  in stones)
+        {
+            if (!stone.transform.IsChildOf(transform))
+            {
+                //stones.Remove(stone);
+                stoneCount--;
+            }
+        }
+        Puzzle2.instance.CheckIsComplete();
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (stones.Contains(other.gameObject))
+        print("5555555555");
+        if (other.CompareTag("Stone"))
         {
-            stones.Remove(other.gameObject);
+            print("stone out");
+            stoneCount--;
+            //stones.Remove(other.gameObject);
 
             if(stones.Count == 0)
             {

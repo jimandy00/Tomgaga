@@ -21,6 +21,7 @@ public class Trap1 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Fire();
+            other.GetComponent<PlayerDie>().Die();
         }
     }
 }
