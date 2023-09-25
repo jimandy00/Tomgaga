@@ -31,7 +31,7 @@ public class Grab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hole = GetComponent<Hole>();
+
     }
 
     // Update is called once per frame
@@ -49,13 +49,25 @@ public class Grab : MonoBehaviour
                 print("슬롯에서 아이템 꺼내기");
                 grabGo = slot.TakeItemOut(transform);
             }
+            else if (hole != null)
+            {
+                // 구멍에서 돌 꺼내기
+                grabGo = hole.TakeStoneOut();
+            }
 
             // 아니면 가장 가까이 있는 아이템 잡음
             else
             {
                 print("가까이 있는 아이템 잡기");
                 grabGo = CompareDistance(cols);
+                if(grabGo.CompareTag("Stone"))
+                {
+                    isStone = true;
+                }
             }
+
+
+
 
             grabGo.GetComponent<Rigidbody>().isKinematic = true;
             grabGo.transform.parent = getGoPosition.transform;
@@ -95,18 +107,23 @@ public class Grab : MonoBehaviour
             {
                 print(slot.name);
                 slot.GetItem(grabGo);
-                grabGo = null;
-                isGrab = false;
+            }
+            else if (hole != null && isStone == true)
+            {
+                hole.PutStone(grabGo);
+
             }
             else if(grabGo != null)
             {
                 grabGo.transform.parent = null;
                 grabGo.GetComponent<Rigidbody>().isKinematic = false;
-                isGrab = false;
             }
 
             prevY = 0;
 
+            grabGo = null;
+            isGrab = false;
+            isStone = false;
         }
     }
 
@@ -134,30 +151,21 @@ public class Grab : MonoBehaviour
 
     GameObject stone;
     bool isStone;
+    Hole hole;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Slot"))
         {
             slot = other.GetComponent<Slot>();
         }
-        // 만약 other이 돌이라면?
-        else if(other.CompareTag("Stone"))
+        
+        // 만약 other이 홀이라면?
+        else if(other.CompareTag("Hole"))
         {
-            // 함수 실행
-            hole.TakeStoneOut();
-
-            // 돌을 잡았다!
-            isStone = true;
-
-            // 잡은 돌을 stone에 대입
-            stone = other.gameObject;
-
-            // 돌의 위치를 손 살짝 위로 옮긴다.
-            other.transform.position = getGoPosition.transform.position;
+            hole = other.GetComponent<Hole>();
         }
     }
 
-    Hole hole;
     private void OnTriggerExit(Collider other)
     {
         if(slot != null && other.gameObject == slot.gameObject)
@@ -167,12 +175,9 @@ public class Grab : MonoBehaviour
 
         // 만약 other 구멍이라면?
         // 그리고 손에 돌이 들려있다면?
-        if(other.CompareTag("Hole") && isStone == true)
+        if (hole != null && other.gameObject == hole.gameObject)
         {
-            hole.PutStone(stone);
-
-            // 돌을 내려놨다.
-            isStone = false;
+            hole = null;
         }
     }
 }
