@@ -13,6 +13,10 @@ public class Spawn : MonoBehaviour
     Player player;
     public GameObject originSpawnPoint;
 
+    bool spawnState;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +24,14 @@ public class Spawn : MonoBehaviour
         player.savedSpawnPoint = originSpawnPoint.transform.position; // spawnPoint01의 위치로 초기화
     }
 
+    public bool completeRespawn;
     public void ReSpawn()
     {
+        print("리스폰 실행되나?");
         transform.position = player.savedSpawnPoint; // 저장된 스폰 포인트로 플레이어 이동
         GameManager.instance.PuzzlesReset(); // 퍼즐 리셋
         player.playerState = true; // 플레이어 상태 '생존'으로 변경
+        completeRespawn = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,8 +39,7 @@ public class Spawn : MonoBehaviour
         if (other.CompareTag("SpawnPoint")) // 플레이어가 트리거에 닿이면?
         {
             player.savedSpawnPoint = other.transform.position; // 플레이어 스폰 포인트 갱신
-            print("스폰 포인트 갱신 : " + player.savedSpawnPoint);
-
+            print("스폰 포인트 갱신 : " + other.gameObject.name);
         }
     }
 }

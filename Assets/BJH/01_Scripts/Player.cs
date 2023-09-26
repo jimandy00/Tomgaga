@@ -7,18 +7,58 @@ public class Player : MonoBehaviour
     public bool playerState;
     public Vector3 savedSpawnPoint;
     public PlayerDie playerDie;
+
+    Spawn spawn;
     void Start()
     {
         playerDie = GetComponent<PlayerDie>();
         playerState = true;
+
+        spawn = GetComponent<Spawn>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerState == false) // 만약 플레이어 상태가 죽음이 된다면?
+        if(Input.GetKeyDown(KeyCode.F))
         {
-            playerDie.Die(); // 플레이어 죽음 Ui 및 재시작 기능을 실행
-        }   
+            playerState = false;
+        }
+
+        if (playerDie.pushZ == true)
+        {
+            spawn.ReSpawn();
+        }
+
+        if(spawn.completeRespawn == true)
+        {
+
+        }
+    }
+
+    IEnumerator coroutine;
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        print(other.gameObject.name);
+        if(other.gameObject.name == "TreasureChest")
+        {
+            print("실행됨");
+            coroutine = dieDelay();
+            if (coroutine != null)
+            {
+                StartCoroutine(coroutine);
+            }
+        }
+    }
+
+    IEnumerator dieDelay()
+    {
+        print("코루틴 실행됨");
+        yield return new WaitForSeconds(3f);
+        coroutine = null;
+        playerState = false;
     }
 }
+
+
