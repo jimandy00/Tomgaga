@@ -11,9 +11,10 @@ using UnityEngine.UI;
 public class PlayerDie : MonoBehaviour
 {
     public Spawn spawn;
+    Player player;
 
     [SerializeField]
-    PlayerMove player;
+    PlayerMove playerMove;
     public AudioSource audioSource;
 
     public OVRInput.Button Abutton; // one
@@ -28,6 +29,9 @@ public class PlayerDie : MonoBehaviour
 
     public GameObject uiObject;
     Image ui;
+    Text text;
+    Color textOriginColor;
+    Color textTransColor;
 
     bool uiState;
 
@@ -58,9 +62,9 @@ public class PlayerDie : MonoBehaviour
         uiState = false;
 
         uiObject.SetActive(false);
-        ui = uiObject.GetComponent<Image>();
+        ui = uiObject.GetComponentInChildren<Image>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>(); // 모든 컴포넌트 가져오기 없지롱
+        playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>(); // 모든 컴포넌트 가져오기 없지롱
 
         originColor = ui.color;
 
@@ -76,18 +80,33 @@ public class PlayerDie : MonoBehaviour
         brushTransColor.a = 0f;
         brushImage.color = brushTransColor; // 투명하게 시작
 
+        text = ui.gameObject.GetComponentInChildren<Text>();
+        textOriginColor = text.color;
+        textTransColor = textOriginColor;
+        textTransColor.a = 0f;
+        text.color = textTransColor; // 투명하게 시작
+
+        player = GetComponent<Player>();
+        
+        print(player.name);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 플레이어가 죽었고, 오디오가 플레이되지 않았으면
-        if (spawn.playerState == false && audioState == false)
+        if(player != null)
         {
-            PlayAudio(2);
-            Die();
+            // 플레이어가 죽었고, 오디오가 플레이되지 않았으면
+            if (player.playerState == false && audioState == false && dieMethodState == false)
+            {
+                PlayAudio(2);
+                Die();
+                
+            }
         }
+
+
 
         if (isRetry == true)
         {
@@ -103,13 +122,16 @@ public class PlayerDie : MonoBehaviour
         audioState = true;
     }
 
+    // 플레이어 죽음
+    bool dieMethodState;
     public void Die()
     {
         uiObject.SetActive(true);
 
-        StartCoroutine(CoUi()); // ui 깜박깜박
+        StartCoroutine(CoUi()); // ui 깜박깜박 // null
 
         isRetry = true;
+        dieMethodState = true;
     }
 
     
@@ -123,7 +145,7 @@ public class PlayerDie : MonoBehaviour
 
         while (time01 < fadeDuration)
         {
-            float alpha = Mathf.Lerp(0f, 1f, time01 / fadeDuration);
+            float alpha = Mathf.Lerp(0f, 0.78f, time01 / fadeDuration);
             ui.color = new Color(originColor.r, originColor.g, originColor.b, alpha); // bg
             time01 += Time.deltaTime;
             yield return null;
@@ -135,13 +157,18 @@ public class PlayerDie : MonoBehaviour
         {
             float alpha = Mathf.Lerp(0f, 1f, time02 / fadeDuration2);
             brushTransColor.a = alpha;
+            textTransColor.a = alpha;
+
             brushImage.color = brushTransColor;
+            text.color = textTransColor;
+
             time02 += Time.deltaTime;
             yield return null;
         }
 
         ui.color = originColor;
         brushImage.color = brushOriginColor;
+        text.color = textOriginColor;
         
     }
 
@@ -151,12 +178,21 @@ public class PlayerDie : MonoBehaviour
         {
             coroutine = StartCoroutine(CoABtn());
         }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.Z))
+            {
+                StopCoroutine(coroutine);
 
-        print("123123123123123");
+                aBtn.gameObject.SetActive(false);
+                coroutine = null;
+                pushZ = true;
+                print("dfdfdf : " + pushZ);
+            }
+        }
 
         if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
         {
-            print("z버튼을 눌렀습니다.");
             // 버튼 클릭하는 소리
             audioSource.clip = audio[3];
 
@@ -165,7 +201,8 @@ public class PlayerDie : MonoBehaviour
             //transform.position = spawn.savedSpawnPoint;
 
             // 플레이어 살아남
-            spawn.playerState = true;
+            player.playerState = true;
+            dieMethodState = false;
 
             // 오디오 초기화
             audioState = false;
@@ -182,6 +219,7 @@ public class PlayerDie : MonoBehaviour
         }
     }
 
+    public bool pushZ;
     IEnumerator CoABtn()
     {
         aBtn.gameObject.SetActive(true);
@@ -189,15 +227,14 @@ public class PlayerDie : MonoBehaviour
         {
             aBtn.enabled = !aBtn.enabled;
 
-            if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
-            {
-                break;
-            }
+            //yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(aBtnDuration);
         }
-        aBtn.gameObject.SetActive(false);
-        coroutine = null;
-        yield return null;        
+        //aBtn.gameObject.SetActive(false);
+        //coroutine = null;
+        //pushZ = true;
+        //print("dfdfdf : " + pushZ);
+        yield return null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -206,7 +243,7 @@ public class PlayerDie : MonoBehaviour
         if(other.CompareTag("DieTrap"))
         {
             print("0000000000");
-            spawn.playerState = false;
+            player.playerState = false;
             //Die();
         }
     }

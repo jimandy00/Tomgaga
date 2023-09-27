@@ -10,40 +10,36 @@ using UnityEngine.UI;
 // 플레이어가 죽음 상태일 때 스폰 포인트에 플레이어를 위치시킨다.
 public class Spawn : MonoBehaviour
 {
-    public bool playerState;
+    Player player;
+    public GameObject originSpawnPoint;
 
-    public Vector3 savedSpawnPoint;
+    bool spawnState;
+
     
+
     // Start is called before the first frame update
     void Start()
     {
-        playerState = true;
-        savedSpawnPoint = transform.position;
+        player = GetComponent<Player>();
+        player.savedSpawnPoint = originSpawnPoint.transform.position; // spawnPoint01의 위치로 초기화
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //ReSpawn();
-    }
-
-    PlayerDie pd;
+    public bool completeRespawn;
     public void ReSpawn()
     {
-        transform.position = savedSpawnPoint;
-        Debug.Log("플레이어를 " + savedSpawnPoint + "로 이동 시켰습니다.");
-        GameManager.instance.PuzzlesReset();
+        print("리스폰 실행되나?");
+        transform.position = player.savedSpawnPoint; // 저장된 스폰 포인트로 플레이어 이동
+        GameManager.instance.PuzzlesReset(); // 퍼즐 리셋
+        player.playerState = true; // 플레이어 상태 '생존'으로 변경
+        completeRespawn = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print("스폰 포인트에 닿은 물체 : " + other.gameObject.name);
-        string name = other.gameObject.name;
-        
-        if (name.Contains("Spawn"))
+        if (other.CompareTag("SpawnPoint")) // 플레이어가 트리거에 닿이면?
         {
-            print("플레이어가 트리거에 닿았습니다.");
-            savedSpawnPoint = other.gameObject.transform.position;
+            player.savedSpawnPoint = other.transform.position; // 플레이어 스폰 포인트 갱신
+            print("스폰 포인트 갱신 : " + other.gameObject.name);
         }
     }
 }

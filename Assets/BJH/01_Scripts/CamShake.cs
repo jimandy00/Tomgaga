@@ -24,15 +24,16 @@ public class CamShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            print("카메라가 흔들립니다.");
-            StartCoroutine(ShakeCamera(shakePower, shakeTime));
-        }
+
+    }
+
+    public void ShakeCamera()
+    {
+        StartCoroutine(IShakeCamera(shakePower, shakeTime));
     }
 
     float timer = 0;
-    IEnumerator ShakeCamera(float shakePower, float shakeTime)
+    IEnumerator IShakeCamera(float shakePower, float shakeTime)
     {
         while (timer <= shakeTime)
         {

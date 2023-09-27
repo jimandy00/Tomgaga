@@ -23,6 +23,8 @@ public class PlayerMove : MonoBehaviour
 
     public Spawn spawn;
 
+    Player player;
+
     bool isDash;
 
     // Controller
@@ -48,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("플레이어를 죽였습니다.");
-            spawn.playerState = false;
+            player.playerState = false;
         }
 
         // 이동값 가져오기
