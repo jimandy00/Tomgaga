@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        print(other.gameObject.name);
         if(other.gameObject.name == "TreasureChest")
         {
             print("½ÇÇàµÊ");
