@@ -21,13 +21,14 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
-        player.savedSpawnPoint = originSpawnPoint.transform.position; // spawnPoint01의 위치로 초기화
+        player.savedSpawnPoint = originSpawnPoint.transform.position;
+
+
     }
 
     public bool completeRespawn;
     public void ReSpawn()
     {
-        print("리스폰 실행되나?");
         transform.position = player.savedSpawnPoint; // 저장된 스폰 포인트로 플레이어 이동
         GameManager.instance.PuzzlesReset(); // 퍼즐 리셋
         player.playerState = true; // 플레이어 상태 '생존'으로 변경

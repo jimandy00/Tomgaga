@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameStart : MonoBehaviour
+public class GameStartBtn : MonoBehaviour
 {
     public OVRInput.Button handTrigger;
     public OVRInput.Controller rTouch;
@@ -26,7 +26,7 @@ public class GameStart : MonoBehaviour
         {
             if (cols[i].gameObject.name == "canvasGo" && isGrab == true)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(1);
                 isGrab = false;
             }
         }

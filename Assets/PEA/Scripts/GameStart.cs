@@ -3,16 +3,16 @@
 //using UnityEngine;
 //using UnityEngine.SceneManagement;
 
-//public class GameStart : MonoBehaviour
+//public class GameStartBtn : MonoBehaviour
 //{
 //    void Start()
 //    {
-        
+
 //    }
 
 //    void Update()
 //    {
-        
+
 //    }
 
 //    public void OnClickStart()

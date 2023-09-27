@@ -100,8 +100,9 @@ public class PlayerDie : MonoBehaviour
             // 플레이어가 죽었고, 오디오가 플레이되지 않았으면
             if (player.playerState == false && audioState == false && dieMethodState == false)
             {
-                PlayAudio(2);
-                Die();
+                print("플레이어가 죽었고, 오디오가 플레이되지 않았으면을 반복");
+                PlayAudio(2); // 죽음 오디오 실행
+                Die(); // 죽음
                 
             }
         }
@@ -118,7 +119,6 @@ public class PlayerDie : MonoBehaviour
     {
         audioSource.clip = audio[idx];
         audioSource.Play();
-        Debug.Log(idx + "번 오디오가 실행되었습니다.");
         audioState = true;
     }
 
@@ -187,7 +187,6 @@ public class PlayerDie : MonoBehaviour
                 aBtn.gameObject.SetActive(false);
                 coroutine = null;
                 pushZ = true;
-                print("dfdfdf : " + pushZ);
             }
         }
 
