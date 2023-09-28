@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class DialogueManager : MonoBehaviour
@@ -59,12 +60,12 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeDialogue(int dialogueNum, int dialogueEndNum, bool isPrologue)
     {
+        dialogueAudioSource.PlayOneShot(dialogueAudioClips[dialogueNum - 1]);
+
         if (isPrologue)
         {
-            PrologueManager.instance.ShowPrologueImage(dialogueNum - 1);
+            PrologueManager.instance.ShowPrologueImage(dialogueNum);
         }
-
-        dialogueAudioSource.PlayOneShot(dialogueAudioClips[dialogueNum - 1]);
 
         if (dialogues.TryGetValue(dialogueNum, out curShowingDialogue))
         {
@@ -86,6 +87,10 @@ public class DialogueManager : MonoBehaviour
         if(dialogueNum < dialogueEndNum)
         {
             yield return TypeDialogue(++dialogueNum, dialogueEndNum, isPrologue);
+        }
+        else if (isPrologue)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         coroutine = null;
