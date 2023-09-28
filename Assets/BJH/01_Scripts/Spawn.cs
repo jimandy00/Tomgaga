@@ -15,6 +15,8 @@ public class Spawn : MonoBehaviour
 
     bool spawnState;
 
+    PlayerDie playerDie;
+
     
 
     // Start is called before the first frame update
@@ -22,6 +24,8 @@ public class Spawn : MonoBehaviour
     {
         player = GetComponent<Player>();
         player.savedSpawnPoint = originSpawnPoint.transform.position; // spawnPoint01의 위치로 초기화
+
+        playerDie = GetComponent<PlayerDie>();
     }
 
     public bool completeRespawn;
@@ -32,6 +36,8 @@ public class Spawn : MonoBehaviour
         GameManager.instance.PuzzlesReset(); // 퍼즐 리셋
         player.playerState = true; // 플레이어 상태 '생존'으로 변경
         completeRespawn = true;
+        //playerDie.pushZ = false;
+        print(playerDie.pushZ);
     }
 
     private void OnTriggerEnter(Collider other)

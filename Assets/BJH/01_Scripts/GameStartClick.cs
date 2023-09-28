@@ -1,20 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameStart : MonoBehaviour
+public class GameStartClick : MonoBehaviour
 {
     public OVRInput.Button handTrigger;
     public OVRInput.Controller rTouch;
     bool isGrab;
 
+    public GameObject canvas;
+    GameStart gameStart;
+
+    private void Start()
+    {
+        gameStart = canvas.GetComponent<GameStart>();
+    }
     // Update is called once per frame
     void Update()
     {
         if(OVRInput.GetDown(handTrigger, rTouch))
         {
             isGrab = true;
+        }
+
+        // 키보드 테스트용
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            gameStart.OnClickStart();
         }
     }
 
@@ -26,7 +38,7 @@ public class GameStart : MonoBehaviour
         {
             if (cols[i].gameObject.name == "canvasGo" && isGrab == true)
             {
-                SceneManager.LoadScene(2);
+                gameStart.OnClickStart();
                 isGrab = false;
             }
         }
