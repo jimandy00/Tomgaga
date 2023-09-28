@@ -20,7 +20,10 @@ public class Dialogue : MonoBehaviour
     {
         if (canShow)
         {
-            DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue);
+            if(DialogueManager.instance != null)
+            {
+                DialogueManager.instance.ShowDialogue(dialogueNum, dialogueEndNum, isPrologue);
+            }
 
             if (oneTime)
             {
