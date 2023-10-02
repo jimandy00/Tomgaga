@@ -22,9 +22,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (SoundManagaer.instance != null)
+        {
+            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+        }
+    }
+
     public void PuzzleClear()
     {
         SoundManagaer.instance.PlaySFX(puzzleClearAudioClip);
+        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
     }
 
     // 플레이어 리스폰 될 때 퍼즐, 트랩 리셋.
@@ -38,5 +47,7 @@ public class GameManager : MonoBehaviour
         {
             puzzle2.ResetPuzzle();
         }
+
+        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Puzzle);
     }
 }

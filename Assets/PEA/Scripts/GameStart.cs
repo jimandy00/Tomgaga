@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameStart : MonoBehaviour
+namespace PEA
 {
-    public void OnClickStart()
+    public class GameStart : MonoBehaviour
     {
-        SceneManager.LoadScene("PrologueScene");
+        public void OnClickStart()
+        {
+            SceneManager.LoadScene("PrologueScene");
+        }
     }
+
 }

@@ -27,8 +27,7 @@ public class PrologueManager : MonoBehaviour
     public Image curImage;
 
     [SerializeField]
-    public PrologueImage[] prologueSprites;
-   
+    public PrologueImage[] prologueSprites;   
 
     private void Awake()
     {
@@ -40,7 +39,12 @@ public class PrologueManager : MonoBehaviour
         prologueDialogue = GetComponent<Dialogue>();
         color = curImage.color;
         material = curImage.material;
-        dissolveRange = material.GetFloat("_DissolveRange");
+        dissolveRange = material.GetFloat("_DissolveRange"); 
+
+        if(SoundManagaer.instance != null)
+        {
+            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Prologue);
+        }
     }
 
     void Update()

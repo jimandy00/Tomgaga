@@ -51,7 +51,6 @@ public class Puzzle3 : MonoBehaviour
                 if (hole.hasStone)
                 {
                     isAnswer = false;
-                    print(isAnswer);
                     PlaySoundAnswerOrNot(isRightHole);
                     return;
                 }
@@ -60,11 +59,10 @@ public class Puzzle3 : MonoBehaviour
 
         isAnswer = true;
         GameManager.instance.PuzzleClear();
-        print(isAnswer);
     }
 
     public void PlaySoundAnswerOrNot(bool isAnswer)
     {
-        //audioSource.PlayOneShot(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
+        SoundManagaer.instance.PlaySFX(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
     }
 }

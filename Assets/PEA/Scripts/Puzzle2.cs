@@ -16,6 +16,7 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue clearDialogue;
     public Dialogue failDialogue;
     public ParticleSystem fragmentParticle;
+    public Puzzle2_Door door;
 
     public bool IsCompleted
     {
@@ -54,6 +55,7 @@ public class Puzzle2 : MonoBehaviour
         trap2.enabled = false;
         GameManager.instance.PuzzleClear();
         print(isCompleted);
+        door.DoorOpen();
     }
 
     public void ResetPuzzle()
