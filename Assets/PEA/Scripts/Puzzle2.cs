@@ -17,6 +17,8 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue failDialogue;
     public ParticleSystem fragmentParticle;
     public Puzzle2_Door door;
+    public AudioClip countdownAudioClip;
+    public AudioSource audioSource;
 
     public bool IsCompleted
     {
@@ -46,6 +48,7 @@ public class Puzzle2 : MonoBehaviour
             if (mural.HasStone)
             {
                 firstStoneDialogue.ShowDialogue();
+                audioSource.Play();
                 print(isCompleted);
                 return;
             }
@@ -54,6 +57,8 @@ public class Puzzle2 : MonoBehaviour
         isCompleted = true;
         trap2.enabled = false;
         GameManager.instance.PuzzleClear();
+        audioSource.Stop();
+        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
         print(isCompleted);
         door.DoorOpen();
     }

@@ -11,8 +11,6 @@ public class Puzzle2_Door : MonoBehaviour
     {
         targetPos = transform.localPosition;
         targetPos.x = -39.5f;
-
-        isOpen = true;
     }
 
     void Update()
