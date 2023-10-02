@@ -45,19 +45,8 @@ public class PrologueManager : MonoBehaviour
         {
             SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Prologue);
         }
-    }
 
-    void Update()
-    {
-        if((Input.GetKeyDown(KeyCode.Space ) || OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))&& !isSTart)
-        {
-            prologueDialogue.ShowDialogue(); 
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ShowPrologueImage(6);
-        }
+        prologueDialogue.ShowDialogue();
     }
 
     public void ShowPrologueImage(int prologueNum)
