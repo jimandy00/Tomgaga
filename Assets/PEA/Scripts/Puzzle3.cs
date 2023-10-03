@@ -65,6 +65,6 @@ public class Puzzle3 : MonoBehaviour
 
     public void PlaySoundAnswerOrNot(bool isAnswer)
     {
-        SoundManagaer.instance.PlaySFX(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
+        SoundManager.instance.PlaySFX(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
     }
 }

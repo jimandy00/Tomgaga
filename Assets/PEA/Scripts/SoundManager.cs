@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManagaer : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     public enum BGM
     {
@@ -14,7 +14,7 @@ public class SoundManagaer : MonoBehaviour
         FaillingLoad
     }
 
-    public static SoundManagaer instance = null;
+    public static SoundManager instance = null;
 
     private AudioSource audioSource;
 

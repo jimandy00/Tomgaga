@@ -14,9 +14,9 @@ public class Trap1 : MonoBehaviour
             ps.Play();
         }
 
-        if (SoundManagaer.instance != null)
+        if (SoundManager.instance != null)
         {
-            SoundManagaer.instance.PlaySFX(fireAudioClip);
+            SoundManager.instance.PlaySFX(fireAudioClip);
         }
         //fireAudioSource.Play();
     }

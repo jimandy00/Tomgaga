@@ -12,9 +12,9 @@ public class Player_Dialogue : MonoBehaviour
 
             if (other.name.Contains("Entry") && other.name.Contains("Puzzle"))
             {
-                if (SoundManagaer.instance != null)
+                if (SoundManager.instance != null)
                 {
-                    SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Puzzle);
+                    SoundManager.instance.PlayBGM(SoundManager.BGM.Puzzle);
                 }
             }
         }

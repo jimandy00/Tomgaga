@@ -11,7 +11,7 @@ public class Trap2 : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<Dialogue>().ShowDialogue();
+        //GetComponent<Dialogue>().ShowDialogue();
     }
 
     void Start()
@@ -22,7 +22,6 @@ public class Trap2 : MonoBehaviour
 
     void Update()
     {
-        //print(lerpT);
         lerpT += Time.deltaTime / 10f;
         transform.position = Vector3.Lerp(originPos, targetPos, lerpT );
     }

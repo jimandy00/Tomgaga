@@ -74,6 +74,7 @@ public class RevolvingDoor : MonoBehaviour
 
     public void ResetRevolvingDoor()
     {
+        hState = Puzzle1.HandleState.None;
         eulerAngle = originEulerAngle;
         transform.eulerAngles = eulerAngle;
         curTime = 0f;

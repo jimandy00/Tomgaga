@@ -24,30 +24,39 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SoundManagaer.instance != null)
+        if (SoundManager.instance != null)
         {
-            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+            SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
         }
     }
 
     public void PuzzleClear()
     {
-        SoundManagaer.instance.PlaySFX(puzzleClearAudioClip);
-        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+        if(SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySFX(puzzleClearAudioClip);
+            SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
+        }
     }
 
     // 플레이어 리스폰 될 때 퍼즐, 트랩 리셋.
     public void PuzzlesReset()
     {
+        print("reset puzzle");
         if (!puzzle1.IsCoimpleted)
         {
+            print("1");
             puzzle1.ResetPuzzle();
         }
         else if (!puzzle2.IsCompleted)
         {
+            print("2");
             puzzle2.ResetPuzzle();
         }
 
-        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Puzzle);
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayBGM(SoundManager.BGM.Puzzle);
+        }
     }
 }

@@ -41,9 +41,9 @@ public class PrologueManager : MonoBehaviour
         material = curImage.material;
         dissolveRange = material.GetFloat("_DissolveRange"); 
 
-        if(SoundManagaer.instance != null)
+        if(SoundManager.instance != null)
         {
-            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Prologue);
+            SoundManager.instance.PlayBGM(SoundManager.BGM.Prologue);
         }
 
         prologueDialogue.ShowDialogue();

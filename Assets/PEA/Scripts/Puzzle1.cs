@@ -57,9 +57,9 @@ public class Puzzle1 : MonoBehaviour
         {
             handleState = HandleState.Right;
             isCompleted = true;
-            if (SoundManagaer.instance != null)
+            if (SoundManager.instance != null)
             {
-                SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+                SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
             }
         }
         else
@@ -79,6 +79,7 @@ public class Puzzle1 : MonoBehaviour
         handleState = HandleState.None;
         foreach (Handle handle in handles)
         {
+            handle.enabled = true;
             handle.ResetHandle();
         }
         revolvingDoor.ResetRevolvingDoor();

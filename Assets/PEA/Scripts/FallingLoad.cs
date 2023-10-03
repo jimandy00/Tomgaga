@@ -107,7 +107,7 @@ public class FallingLoad : MonoBehaviour
                     loadState = LoadState.idle;
                 }
 
-                SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+                SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
                 break;
         }
     }
@@ -123,7 +123,7 @@ public class FallingLoad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             FallingStart();
-            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.FaillingLoad);
+            SoundManager.instance.PlayBGM(SoundManager.BGM.FaillingLoad);
         }
     }
 }
