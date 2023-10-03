@@ -57,6 +57,10 @@ public class Puzzle1 : MonoBehaviour
         {
             handleState = HandleState.Right;
             isCompleted = true;
+            if (SoundManagaer.instance != null)
+            {
+                SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+            }
         }
         else
         {

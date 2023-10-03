@@ -9,6 +9,14 @@ public class Player_Dialogue : MonoBehaviour
         if (other.CompareTag("Dialogue"))
         {
             other.GetComponent<Dialogue>().ShowDialogue();
+
+            if (other.name.Contains("Entry") && other.name.Contains("Puzzle"))
+            {
+                if (SoundManagaer.instance != null)
+                {
+                    SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.Puzzle);
+                }
+            }
         }
     }
 
