@@ -30,12 +30,13 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
+        dialogueAudioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
-        ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
-        dialogueAudioSource = GetComponent<AudioSource>();
     }
 
     public void ReadDialogueCSV(TextAsset csvData)
