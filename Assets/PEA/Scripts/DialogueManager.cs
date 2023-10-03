@@ -30,12 +30,13 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
+        dialogueAudioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
-        ReadDialogueCSV(Resources.Load<TextAsset>(dialogueCSVPath));
-        dialogueAudioSource = GetComponent<AudioSource>();
     }
 
     public void ReadDialogueCSV(TextAsset csvData)
@@ -91,6 +92,11 @@ public class DialogueManager : MonoBehaviour
         else if (isPrologue)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if(dialogueNum == 36)
+        {
+            GameOver.instance.StartGameOverUI();
         }
 
         coroutine = null;

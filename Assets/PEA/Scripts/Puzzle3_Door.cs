@@ -5,21 +5,29 @@ using UnityEngine;
 public class Puzzle3_Door : MonoBehaviour
 {
     private bool isOpen = false;
+    private float openSpeed = 60f;
     private Vector3 euler;
+
+    private Vector3 targetEuler = new Vector3(0f, 140f, 0f);
+
+    public Transform rightDoor;
+    public Transform leftDoor;
 
     void Start()
     {
-        euler = transform.localEulerAngles;
-
-        isOpen = true;
+        euler = leftDoor.localEulerAngles;
     }
 
     void Update()
     {
-        if(isOpen && euler.y > -135f)
-        {
-            euler.y -= 30f * Time.deltaTime;
-            transform.localEulerAngles = euler;
-        }
+        rightDoor.localEulerAngles = Vector3.Lerp(rightDoor.localEulerAngles, targetEuler, Time.deltaTime);
+
+        euler = Vector3.Lerp(euler, -targetEuler, Time.deltaTime);
+        leftDoor.localEulerAngles = euler;
+    }
+
+    public void OpenDoor()
+    {
+        isOpen = true;
     }
 }

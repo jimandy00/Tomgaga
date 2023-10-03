@@ -13,6 +13,7 @@ public class Puzzle3 : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip rightHoleAudioClip;
     public AudioClip wrongHoleAudioClip;
+    public Puzzle3_Door door;
 
     private void Awake()
     {
@@ -59,10 +60,11 @@ public class Puzzle3 : MonoBehaviour
 
         isAnswer = true;
         GameManager.instance.PuzzleClear();
+        door.OpenDoor();
     }
 
     public void PlaySoundAnswerOrNot(bool isAnswer)
     {
-        SoundManagaer.instance.PlaySFX(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
+        SoundManager.instance.PlaySFX(isAnswer ? rightHoleAudioClip : wrongHoleAudioClip);
     }
 }

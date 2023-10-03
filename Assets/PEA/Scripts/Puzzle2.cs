@@ -17,7 +17,6 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue failDialogue;
     public ParticleSystem fragmentParticle;
     public Puzzle2_Door door;
-    public AudioClip countdownAudioClip;
     public AudioSource audioSource;
 
     public bool IsCompleted
@@ -28,6 +27,7 @@ public class Puzzle2 : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void EntryPuzzles2()
@@ -58,7 +58,7 @@ public class Puzzle2 : MonoBehaviour
         trap2.enabled = false;
         GameManager.instance.PuzzleClear();
         audioSource.Stop();
-        SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
+        SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
         print(isCompleted);
         door.DoorOpen();
     }
