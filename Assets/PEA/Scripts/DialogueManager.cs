@@ -93,6 +93,11 @@ public class DialogueManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
+        if(dialogueNum == 36)
+        {
+            GameOver.instance.StartGameOverUI();
+        }
+
         coroutine = null;
         yield return null;
     }

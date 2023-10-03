@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
+    public static GameOver instance = null;
+
     // canvas
     public GameObject canvas;
 
@@ -20,7 +22,18 @@ public class GameOver : MonoBehaviour
     // Text
     public Text text;
 
-    
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
