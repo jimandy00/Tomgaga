@@ -14,7 +14,7 @@ public class FallingLoad : MonoBehaviour
     private LoadState loadState = LoadState.idle;
 
     private float curTime = 0f;
-    private float fallRate = 1f;
+    private float fallRate =0.5f;
     private int loadIndex = -1;
     private Transform left;
     private Transform right;
@@ -106,6 +106,8 @@ public class FallingLoad : MonoBehaviour
                     right.localEulerAngles = Vector3.zero;
                     loadState = LoadState.idle;
                 }
+
+                SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.PlayTheme);
                 break;
         }
     }
@@ -121,6 +123,7 @@ public class FallingLoad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             FallingStart();
+            SoundManagaer.instance.PlayBGM(SoundManagaer.BGM.FaillingLoad);
         }
     }
 }

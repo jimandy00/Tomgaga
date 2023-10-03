@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class SoundManagaer : MonoBehaviour
 {
+    public enum BGM
+    {
+        MainTheme,
+        Prologue,
+        PlayTheme,
+        Puzzle,
+        EngindTheme,
+        FaillingLoad
+    }
+
     public static SoundManagaer instance = null;
 
     private AudioSource audioSource;
+
+    public AudioClip[] bgmClips;
 
     private void Awake()
     {
@@ -31,9 +43,9 @@ public class SoundManagaer : MonoBehaviour
         
     }
 
-    public void PlayBGM(AudioClip bgmClip)
+    public void PlayBGM(BGM bgm)
     {
-        audioSource.clip = bgmClip;
+        audioSource.clip = bgmClips[(int)bgm];
         audioSource.Play();
     }
 
