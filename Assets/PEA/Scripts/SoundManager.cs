@@ -26,6 +26,7 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            audioSource = GetComponent<AudioSource>();
         }
         else
         {
@@ -45,6 +46,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(BGM bgm)
     {
+        print(bgmClips[(int)bgm]);
         audioSource.clip = bgmClips[(int)bgm];
         audioSource.Play();
     }

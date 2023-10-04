@@ -10,7 +10,6 @@ public class GameStartClick : MonoBehaviour
 
     public GameObject canvas;
     PEA.GameStart gameStart;
-   
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class GameStartClick : MonoBehaviour
         {
             if (cols[i].gameObject.name == "canvasGo" && isGrab == true)
             {
-                //gameStart.OnClickStart();
+                gameStart.OnClickStart();
                 isGrab = false;
             }
         }

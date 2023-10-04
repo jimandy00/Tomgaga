@@ -20,10 +20,13 @@ public class Puzzle3_Door : MonoBehaviour
 
     void Update()
     {
-        rightDoor.localEulerAngles = Vector3.Lerp(rightDoor.localEulerAngles, targetEuler, Time.deltaTime);
+        if (isOpen)
+        {
+            rightDoor.localEulerAngles = Vector3.Lerp(rightDoor.localEulerAngles, targetEuler, Time.deltaTime);
 
-        euler = Vector3.Lerp(euler, -targetEuler, Time.deltaTime);
-        leftDoor.localEulerAngles = euler;
+            euler = Vector3.Lerp(euler, -targetEuler, Time.deltaTime);
+            leftDoor.localEulerAngles = euler;
+        }
     }
 
     public void OpenDoor()

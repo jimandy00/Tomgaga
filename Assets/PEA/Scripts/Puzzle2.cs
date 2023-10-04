@@ -43,12 +43,12 @@ public class Puzzle2 : MonoBehaviour
         {
             isTrapStart = true;
             trap2.enabled = true;
+            firstStoneDialogue.ShowDialogue();
         }
         foreach (Puzzle2_Mural mural in murals)
         {
             if (mural.HasStone)
             {
-                firstStoneDialogue.ShowDialogue();
                 audioSource.Play();
                 print(isCompleted);
                 return;
