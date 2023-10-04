@@ -19,6 +19,11 @@ public class LastMural : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            ChangePos();
+        }
+
         if (isChanged)
         {
             mino.position = Vector3.Lerp(mino.position, minoTargetPos, Time.deltaTime);

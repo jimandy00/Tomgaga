@@ -16,6 +16,7 @@ TagManager:
   - Stone
   - DieTrap
   - Mural
+  - MuralPiece
   layers:
   - Default
   - TransparentFX

@@ -9,11 +9,11 @@ public class GameStartClick : MonoBehaviour
     bool isGrab;
 
     public GameObject canvas;
-    GameStart gameStart;
+    PEA.GameStart gameStart;
 
     private void Start()
     {
-        gameStart = canvas.GetComponent<GameStart>();
+        gameStart = canvas.GetComponent<PEA.GameStart>();
     }
     // Update is called once per frame
     void Update()

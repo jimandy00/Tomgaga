@@ -44,9 +44,6 @@ public class Grab : MonoBehaviour
 
             Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Target"));
 
-            if (cols.Length == 0)
-                return;
-
             if (slot != null)
             {
                 print("슬롯에서 아이템 꺼내기");
@@ -60,7 +57,7 @@ public class Grab : MonoBehaviour
             }
 
             // 아니면 가장 가까이 있는 아이템 잡음
-            else 
+            else if(cols.Length > 0)
             {
                 print("가까이 있는 아이템 잡기");
                 grabGo = CompareDistance(cols);

@@ -6,11 +6,11 @@ using TMPro;
 
 public class Slot : MonoBehaviour
 {
-    private bool hasItem = false;
+    public bool hasItem = false;
     private bool isClicked = false;
     private Coroutine coroutine = null;
 
-    private int itemCount;
+    public int itemCount;
     private ItemInformation itemInfo;
     public TMP_Text itemCountText;
 
@@ -73,7 +73,6 @@ public class Slot : MonoBehaviour
                 hasItem = false;
             }
         }
-
         return item;
     }
 
