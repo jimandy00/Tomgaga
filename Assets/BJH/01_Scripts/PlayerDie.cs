@@ -58,6 +58,8 @@ public class PlayerDie : MonoBehaviour
 
     void Start()
     {
+        spawn = GetComponent<Spawn>();
+
         uiState = false;
 
         uiObject.SetActive(false);
@@ -171,54 +173,50 @@ public class PlayerDie : MonoBehaviour
         
     }
 
+    public bool pushZ;
     private void Retry()
     {
         if(coroutine == null)
         {
-            coroutine = StartCoroutine(CoABtn());
+            coroutine = StartCoroutine(CoABtn()); // 다시 시작하려면 A버튼을 누르세요.
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.Z))
+            if(OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
             {
+                // 버튼 클릭하는 소리
+                audioSource.clip = audio[3];
+
                 StopCoroutine(coroutine);
 
+                //// 스폰 포인트에서 다시 시작
+                //transform.position = spawn.savedSpawnPoint;
+
+                // 플레이어 살아남
+                player.playerState = true;
+                dieMethodState = false;
+
+                // 오디오 초기화
+                audioState = false;
+
+                // Ui 끄기
+                uiObject.SetActive(false);
+                uiState = false;
+
+                // retry값 끄기
+                isRetry = false;
+
+                //spawn.ReSpawn();
                 aBtn.gameObject.SetActive(false);
                 coroutine = null;
-                pushZ = true;
-                print("dfdfdf : " + pushZ);
+                //pushZ = true;
+
+                spawn.ReSpawn();
             }
-        }
-
-        if (OVRInput.GetDown(Abutton, Rcontroller) || Input.GetKeyDown(KeyCode.Z))
-        {
-            // 버튼 클릭하는 소리
-            audioSource.clip = audio[3];
-
-
-            //// 스폰 포인트에서 다시 시작
-            //transform.position = spawn.savedSpawnPoint;
-
-            // 플레이어 살아남
-            player.playerState = true;
-            dieMethodState = false;
-
-            // 오디오 초기화
-            audioState = false;
-
-            // Ui 끄기
-            uiObject.SetActive(false);
-            uiState = false;
-
-            // retry값 끄기
-            isRetry = false;
-
-            //spawn.ReSpawn();
-
         }
     }
 
-    public bool pushZ;
+
     IEnumerator CoABtn()
     {
         aBtn.gameObject.SetActive(true);

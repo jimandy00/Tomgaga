@@ -25,10 +25,13 @@ public class Player : MonoBehaviour
             playerState = false;
         }
 
-        if (playerDie.pushZ == true)
-        {
-            spawn.ReSpawn();
-        }
+        //if (playerDie.pushZ == true)
+        //{
+        //    print("아니 왜 계속 뜨지?");
+        //    spawn.ReSpawn();
+            
+        //    playerDie.pushZ = false;
+        //}
 
         if(spawn.completeRespawn == true)
         {
