@@ -44,6 +44,9 @@ public class Grab : MonoBehaviour
 
             Collider[] cols = Physics.OverlapSphere(transform.position, 0.5f, 1 << LayerMask.NameToLayer("Target"));
 
+            if (cols.Length == 0)
+                return;
+
             if (slot != null)
             {
                 print("슬롯에서 아이템 꺼내기");
@@ -57,7 +60,7 @@ public class Grab : MonoBehaviour
             }
 
             // 아니면 가장 가까이 있는 아이템 잡음
-            else
+            else 
             {
                 print("가까이 있는 아이템 잡기");
                 grabGo = CompareDistance(cols);
@@ -71,10 +74,13 @@ public class Grab : MonoBehaviour
                 }
             }
 
-            grabGo.GetComponent<Rigidbody>().isKinematic = true;
-            grabGo.transform.parent = getGoPosition.transform;
-            grabGo.transform.localPosition = Vector3.zero;
-            isGrab = true;
+            //grabGo.GetComponent<Rigidbody>().isKinematic = true;
+            if(grabGo != null)
+            {
+                grabGo.transform.parent = getGoPosition.transform;
+                grabGo.transform.localPosition = Vector3.zero;
+                isGrab = true;
+            }
         }
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
@@ -118,7 +124,7 @@ public class Grab : MonoBehaviour
             else if(grabGo != null)
             {
                 grabGo.transform.parent = null;
-                grabGo.GetComponent<Rigidbody>().isKinematic = false;
+                //grabGo.GetComponent<Rigidbody>().isKinematic = false;
             }
 
             prevY = 0;
@@ -135,19 +141,25 @@ public class Grab : MonoBehaviour
         Collider nearest = null;
         float nearestDistance = float.MaxValue;
 
-        foreach (Collider collider in cols)
+        if(cols.Length > 0)
         {
-            
-
-            float distance = Vector3.Distance(transform.position, collider.transform.position);
-            if (distance < nearestDistance)
-            {
-                nearest = collider;
-                nearestDistance = distance;                
+            foreach (Collider collider in cols)
+            {         
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearest = collider;
+                    nearestDistance = distance;                
+                }
             }
+            return nearest.gameObject;
+        }
+        else
+        {
+            return null;
         }
 
-        return nearest.gameObject;
+
     }
 
     GameObject stone;

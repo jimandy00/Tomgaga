@@ -9,6 +9,8 @@ public class Puzzle2 : MonoBehaviour
     private bool isTrapStart = false;
     private bool isCompleted = false;
 
+    private AudioSource audioSource;
+
     public Puzzle2_Mural[] murals;
     public Trap2 trap2;
 
@@ -17,7 +19,6 @@ public class Puzzle2 : MonoBehaviour
     public Dialogue failDialogue;
     public ParticleSystem fragmentParticle;
     public Puzzle2_Door door;
-    public AudioSource audioSource;
 
     public bool IsCompleted
     {
@@ -58,7 +59,10 @@ public class Puzzle2 : MonoBehaviour
         trap2.enabled = false;
         GameManager.instance.PuzzleClear();
         audioSource.Stop();
-        SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme);
+        if(SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayBGM(SoundManager.BGM.PlayTheme); 
+        }
         print(isCompleted);
         door.DoorOpen();
     }

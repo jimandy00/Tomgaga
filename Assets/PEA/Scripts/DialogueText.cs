@@ -9,7 +9,10 @@ public class DialogueText : MonoBehaviour
 
     void Start()
     {
-        DialogueManager.instance.dialogueText = GetComponent<TMP_Text>();
+        if(DialogueManager.instance != null)
+        {
+            DialogueManager.instance.dialogueText = GetComponent<TMP_Text>();
+        }
 
         startDialogue.ShowDialogue();
     }

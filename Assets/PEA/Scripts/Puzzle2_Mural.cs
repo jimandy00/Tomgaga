@@ -55,14 +55,23 @@ public class Puzzle2_Mural : MonoBehaviour
 
     public void IsStoneStay()
     {
-        foreach (GameObject stone  in stones)
+        //foreach (GameObject stone  in stones)
+        //{
+        //    if (!stone.transform.IsChildOf(transform))
+        //    {
+        //        //stones.Remove(stone);
+        //        stoneCount--;
+        //    }
+        //    print(stoneCount);
+        //}
+
+        stoneCount--;
+
+        if(stoneCount <= 0)
         {
-            if (!stone.transform.IsChildOf(transform))
-            {
-                //stones.Remove(stone);
-                stoneCount--;
-            }
+            hasStone = false;
         }
+
         Puzzle2.instance.CheckIsComplete();
     }
 
