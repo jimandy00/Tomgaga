@@ -9,11 +9,12 @@ public class GameStartClick : MonoBehaviour
     bool isGrab;
 
     public GameObject canvas;
-    GameStart gameStart;
+    PEA.GameStart gameStart;
+   
 
     private void Start()
     {
-        gameStart = canvas.GetComponent<GameStart>();
+        gameStart = canvas.GetComponent<PEA.GameStart>();
     }
     // Update is called once per frame
     void Update()
@@ -38,7 +39,7 @@ public class GameStartClick : MonoBehaviour
         {
             if (cols[i].gameObject.name == "canvasGo" && isGrab == true)
             {
-                gameStart.OnClickStart();
+                //gameStart.OnClickStart();
                 isGrab = false;
             }
         }
