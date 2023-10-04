@@ -10,10 +10,9 @@ using UnityEngine.UI;
 
 public class PlayerDie : MonoBehaviour
 {
-    public Spawn spawn;
+    Spawn spawn;
     Player player;
 
-    [SerializeField]
     PlayerMove playerMove;
     public AudioSource audioSource;
 
